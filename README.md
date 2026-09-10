@@ -6,6 +6,8 @@ A lightweight, single-file web app that lets you search, filter, and browse arti
 
 ## 🧭 How to Use
 
+#### No installation required.
+
 Getting started is simple. You can search articles from any **public Medium profile** directly from your browser — no installation required.
 
 ### 1. 🚀 Open the Live Demo
@@ -221,20 +223,6 @@ This project is intentionally a **single-page, client-side-only application** �
 - **`localStorage`** for lightweight persistence
 - **Responsive, component-style CSS** using CSS custom properties for light/dark theming
 - **Progressive enhancement mindset** — designed so the data source can be swapped later without a UI rewrite
-
----
-
-## 🚀 Getting Started
-
-No installation required.
-
-1. Clone or download this repository.
-2. Open `index.html` in any modern browser.
-3. Enter a public Medium profile URL (e.g. `https://medium.com/@yourusername`).
-4. Type a search term and/or add keyword filters, then click **Search Medium**.
-
-Optionally, deploy it for free on **GitHub Pages**:
-`Settings → Pages → Deploy from branch → main / root`
 
 ---
 
