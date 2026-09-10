@@ -1,8 +1,10 @@
 # Charlie MJ Medium Profile Article Search Engine
 
+[Charlie MJ Medium Profile Article Search Engine](./assets/cover-pic.png)
+
 A lightweight, single-file web app that lets you search, filter, and browse articles from any public Medium profile — with live keyword highlighting, cover images, sorting, grid/list views, and dark mode. No backend, no build step, no dependencies to install. Just open the HTML file and go.
 
-🔗 **Live demo:** *(add your GitHub Pages link here once deployed)*
+🔗 **Live demo:** *([🚀 𝗕𝘂𝗶𝗹𝘁 𝗮 𝗺𝗶𝗻𝗶 𝘀𝗶𝗱𝗲 𝗽𝗿𝗼𝗷𝗲𝗰𝘁: 𝗠𝗲𝗱𝗶𝘂𝗺 𝗣𝗿𝗼𝗳𝗶𝗹𝗲 𝗔𝗿𝘁𝗶𝗰𝗹𝗲 𝗦𝗲𝗮𝗿𝗰𝗵 𝗘𝗻𝗴𝗶𝗻𝗲](https://lnkd.in/p/dUpZr6xE))*
 
 ---
 
@@ -141,8 +143,8 @@ Optionally, deploy it for free on **GitHub Pages**:
 
 ## 👤 Author
 
-**Charlie MJ**
-GitHub: [awsrmustansarjavaid](https://github.com/awsrmustansarjavaid)
+**Raja Muhammad Mustansar Javaid**
+GitHub: [awsrmmustansarjavaid](https://github.com/awsrmmustansarjavaid)
 
 ---
 
