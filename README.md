@@ -6,7 +6,35 @@ A lightweight, single-file web app that lets you search, filter, and browse arti
 
  🚀 **[Live Demo](https://awsrmmustansarjavaid.github.io/medium-article-search-engine/)**
 
- 
+ ## 🧭 How to Use
+
+Follow these steps to search any public Medium profile:
+
+### 1. Open the Live Demo
+Click the link below to launch the app in your browser — no installation needed.
+
+🚀 **[Live Demo](https://awsrmmustansarjavaid.github.io/medium-article-search-engine/)**
+
+### 2. Enter a Medium Profile URL
+Paste the public Medium profile you want to search (e.g. `https://medium.com/@username`) into the **Medium Profile URL** field. Your last-used profile is remembered automatically for next time.
+
+### 3. Type Your Main Search Term
+In the **Search Article** field, type the keyword you want to find across article titles and content. Matches will be highlighted in **yellow**.
+
+### 4. Add Extra Keywords (Optional)
+Use the **Add Keyword** field to stack additional filter terms — click **+ Add** (or press Enter) after each one. These appear as removable chips and are highlighted in **green** wherever they match.
+
+### 5. Click "Search Medium"
+Hit the **Search Medium** button to fetch the profile's latest articles and apply your filters.
+
+### 6. Browse Your Results
+- Switch between **Grid** and **List** view using the toggle button.
+- **Sort** results by Newest, Oldest, or Title using the dropdown.
+- Click **Open Article** on any card to read the full article on Medium.
+- Toggle the 🌙 / ☀️ icon anytime to switch between **dark** and **light** mode.
+
+### 7. Start a New Search
+Click **Clear** to reset the search fields and keyword filters and start over.
 
 ---
 
