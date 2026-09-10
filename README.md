@@ -6,33 +6,110 @@ A lightweight, single-file web app that lets you search, filter, and browse arti
 
 ## 🧭 How to Use
 
-Follow these steps to search any public Medium profile:
+Getting started is simple. You can search articles from any **public Medium profile** directly from your browser — no installation required.
 
-### 1. Open the Live Demo
-Click the link below to launch the app in your browser — no installation needed.
+### 1. 🚀 Open the Live Demo
 
-🚀 **[Live Demo](https://awsrmmustansarjavaid.github.io/medium-article-search-engine/)**
+Launch the application directly in your browser:
 
-### 2. Enter a Medium Profile URL
-Paste the public Medium profile you want to search (e.g. `https://medium.com/@username`) into the **Medium Profile URL** field. Your last-used profile is remembered automatically for next time.
+🚀 [**Open the Medium Profile Article Search Engine**](https://awsrmmustansarjavaid.github.io/medium-article-search-engine/)
 
-### 3. Type Your Main Search Term
-In the **Search Article** field, type the keyword you want to find across article titles and content. Matches will be highlighted in **yellow**.
+No installation or download is required.
 
-### 4. Add Extra Keywords (Optional)
-Use the **Add Keyword** field to stack additional filter terms — click **+ Add** (or press Enter) after each one. These appear as removable chips and are highlighted in **green** wherever they match.
+### 2. 🔗 Enter a Medium Profile URL
 
-### 5. Click "Search Medium"
-Hit the **Search Medium** button to fetch the profile's latest articles and apply your filters.
+Paste the public Medium profile you want to search into the **Medium Profile URL** field.
 
-### 6. Browse Your Results
-- Switch between **Grid** and **List** view using the toggle button.
-- **Sort** results by Newest, Oldest, or Title using the dropdown.
-- Click **Open Article** on any card to read the full article on Medium.
-- Toggle the 🌙 / ☀️ icon anytime to switch between **dark** and **light** mode.
+For example:
 
-### 7. Start a New Search
-Click **Clear** to reset the search fields and keyword filters and start over.
+```text
+https://medium.com/@username
+```
+
+The application automatically remembers your last-used profile for your next search.
+
+### 3. 🔎 Enter Your Main Search Term
+
+In the **Search Article** field, enter the keyword or phrase you want to find.
+
+The application searches across:
+
+* Article titles
+* Article content
+
+Matching terms are highlighted in **yellow** so you can quickly identify relevant results.
+
+### 4. ➕ Add Extra Keywords
+
+You can optionally add additional search terms using the **Add Keyword** field.
+
+After entering a keyword:
+
+* Click **+ Add**
+* Or press **Enter**
+
+Each keyword appears as a removable chip.
+
+Additional keyword matches are highlighted in **green**.
+
+This allows you to combine multiple search terms and narrow down your results.
+
+### 5. 🔍 Search Medium
+
+Click the **Search Medium** button.
+
+The application will:
+
+1. Fetch the latest articles from the selected public Medium profile.
+2. Search the articles using your main search term.
+3. Apply any additional keyword filters.
+4. Display the matching articles.
+
+### 6. 📚 Browse Your Results
+
+Once your results are displayed, you can customize how you view and organize them.
+
+#### Grid or List View
+
+Switch between **Grid** and **List** layouts using the view toggle.
+
+#### Sort Results
+
+Use the sorting dropdown to organize articles by:
+
+* 🆕 Newest
+* 📅 Oldest
+* 🔤 Title
+
+#### Open an Article
+
+Click **Open Article** on any result card to read the complete article on Medium.
+
+#### Dark / Light Mode
+
+Use the 🌙 / ☀️ button to switch between **dark mode** and **light mode** at any time.
+
+### 7. 🧹 Start a New Search
+
+When you want to start over, click **Clear**.
+
+This resets:
+
+* The Medium profile URL
+* Main search term
+* Additional keywords
+* Search filters
+
+You can then begin a completely new search.
+
+### 🎯 That's It!
+
+You can now quickly search and explore articles from any public Medium profile without installing anything.
+
+**Open the live application and start searching:**
+
+🚀 [**Launch Medium Profile Article Search Engine**](https://awsrmmustansarjavaid.github.io/medium-article-search-engine/)
+
 
 ---
 
