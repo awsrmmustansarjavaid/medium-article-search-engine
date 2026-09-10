@@ -4,9 +4,7 @@
 
 A lightweight, single-file web app that lets you search, filter, and browse articles from any public Medium profile — with live keyword highlighting, cover images, sorting, grid/list views, and dark mode. No backend, no build step, no dependencies to install. Just open the HTML file and go.
 
- 🚀 **[Live Demo](https://awsrmmustansarjavaid.github.io/medium-article-search-engine/)**
-
- ## 🧭 How to Use
+## 🧭 How to Use
 
 Follow these steps to search any public Medium profile:
 
