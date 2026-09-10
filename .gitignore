@@ -1,0 +1,59 @@
+# =============================================================
+# .gitignore
+# Medium Profile Article Search Engine
+#
+# This project is a static, single-file HTML/CSS/JS app with no
+# build step and no package manager required to run it. This
+# .gitignore is kept broad on purpose so it still covers you if
+# you later add tooling (npm, an editor, a bundler, etc.).
+# =============================================================
+
+# -------------------------------------------------------------
+# OS-generated files
+# -------------------------------------------------------------
+.DS_Store          # macOS folder metadata
+Thumbs.db          # Windows thumbnail cache
+Desktop.ini        # Windows folder settings
+ehthumbs.db        # Windows thumbnail cache (network drives)
+
+# -------------------------------------------------------------
+# Editor / IDE folders
+# -------------------------------------------------------------
+.vscode/           # VS Code workspace settings
+.idea/             # JetBrains (WebStorm/IntelliJ) project files
+*.sublime-project
+*.sublime-workspace
+*.swp              # Vim swap files
+*.swo
+
+# -------------------------------------------------------------
+# Node / npm (only relevant if you add tooling later,
+# e.g. a linter, formatter, or local dev server)
+# -------------------------------------------------------------
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log*
+yarn-error.log*
+
+# -------------------------------------------------------------
+# Environment / secrets
+# (not currently used by this project, but ignored as a
+# safety default in case an API key is ever added later)
+# -------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+
+# -------------------------------------------------------------
+# Logs & temp files
+# -------------------------------------------------------------
+*.log
+*.tmp
+*.bak
+
+# -------------------------------------------------------------
+# Local build/output folders (in case a bundler is added later)
+# -------------------------------------------------------------
+dist/
+build/

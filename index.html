@@ -1,0 +1,2109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- =========================================================
+         PAGE TITLE
+         ========================================================= -->
+    <title>Charlie MJ Medium Profile Article Search Engine</title>
+
+    <!-- Bootstrap 5 CDN for responsive frontend components -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- =========================================================
+         CUSTOM CSS
+         ========================================================= -->
+    <style>
+        /*
+        =========================================================
+        CHARLIE MJ MEDIUM ARTICLE SEARCH ENGINE
+        CUSTOM FRONTEND STYLES
+        =========================================================
+
+        The visual design intentionally avoids displaying large
+        article descriptions. Search results contain:
+
+            - Cover image
+            - Article title
+            - Publication date
+            - Open Article button
+
+        This keeps the page clean when many articles are found.
+        */
+
+        :root {
+            --page-bg: #f4f7fb;
+            --card-bg: rgba(255, 255, 255, 0.92);
+            --text-main: #172033;
+            --text-muted: #6b7280;
+            --border: rgba(15, 23, 42, 0.08);
+            --accent: #7c3aed;
+            --accent-dark: #5b21b6;
+            --search-highlight: #ffe066;
+            --keyword-highlight: #b8f2d0;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-main);
+            font-family:
+                Inter,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            /*
+                Modern layered background.
+                No external background image is required.
+            */
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(124, 58, 237, 0.13),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(14, 165, 233, 0.12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(16, 185, 129, 0.09),
+                    transparent 30%
+                ),
+                var(--page-bg);
+
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            --page-bg: #0b1020;
+            --card-bg: rgba(18, 25, 43, 0.94);
+            --text-main: #f3f4f6;
+            --text-muted: #a7b0c0;
+            --border: rgba(255, 255, 255, 0.09);
+            --search-highlight: #66520a;
+            --keyword-highlight: #124d35;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(124, 58, 237, 0.18),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 15%,
+                    rgba(14, 165, 233, 0.12),
+                    transparent 30%
+                ),
+                #0b1020;
+        }
+
+        .page-shell {
+            max-width: 1250px;
+            margin: auto;
+            padding: 28px 18px 60px;
+        }
+
+        /* ======================================================
+           BRAND / TEXT LOGO
+           ====================================================== */
+
+        .brand-area {
+            text-align: center;
+            padding: 20px 10px 14px;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0;
+            font-size: clamp(25px, 4vw, 42px);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+        }
+
+        .brand-icon {
+            width: 45px;
+            height: 45px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            color: white;
+            background: linear-gradient(135deg, #111827, #7c3aed);
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+        }
+
+        .brand-subtitle {
+            margin: 8px 0 0;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* ======================================================
+           GITHUB PROFILE
+           ====================================================== */
+
+        .github-profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 8px 0 25px;
+        }
+
+        .github-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.18);
+            object-fit: cover;
+        }
+
+        .github-name {
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .github-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .github-link:hover {
+            text-decoration: underline;
+        }
+
+        /* ======================================================
+           SEARCH PANEL
+           ====================================================== */
+
+        .search-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 18px 55px rgba(15, 23, 42, 0.09);
+            backdrop-filter: blur(16px);
+            margin-bottom: 22px;
+        }
+
+        .form-label {
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 13px;
+        }
+
+        .form-control {
+            min-height: 48px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.78);
+            color: #111827;
+        }
+
+        body.dark-mode .form-control {
+            background: rgba(255, 255, 255, 0.06);
+            color: #f3f4f6;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+        }
+
+        .search-button {
+            min-height: 48px;
+            border-radius: 12px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #111827, #7c3aed);
+            border: none;
+        }
+
+        .search-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .add-keyword-button {
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        /* ======================================================
+           KEYWORD CHIPS
+           ====================================================== */
+
+        .keyword-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 10px;
+        }
+
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #047857;
+            border: 1px solid #a7f3d0;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .keyword-chip button {
+            border: 0;
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            line-height: 1;
+        }
+
+        /* ======================================================
+           RESULT TOOLBAR
+           ====================================================== */
+
+        .results-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 24px 0 15px;
+        }
+
+        .results-title {
+            font-size: 22px;
+            font-weight: 900;
+            margin: 0;
+        }
+
+        .result-count {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .toolbar-select {
+            width: auto;
+            min-width: 155px;
+            min-height: 40px;
+            border-radius: 10px;
+        }
+
+        /* ======================================================
+           ARTICLE CARDS
+           ====================================================== */
+
+        .article-card {
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: var(--card-bg);
+            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.07);
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.13);
+        }
+
+        .cover-wrapper {
+            position: relative;
+            height: 190px;
+            overflow: hidden;
+            background: #e5e7eb;
+        }
+
+        .cover-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .article-card:hover .cover-image {
+            transform: scale(1.035);
+        }
+
+        .cover-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                linear-gradient(135deg, #111827, #7c3aed);
+            color: white;
+            font-size: 42px;
+        }
+
+        .article-body {
+            padding: 16px;
+        }
+
+        .article-title {
+            margin: 0 0 9px;
+            font-size: 17px;
+            line-height: 1.38;
+            font-weight: 900;
+        }
+
+        .article-title a {
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .article-title a:hover {
+            text-decoration: underline;
+        }
+
+        .article-date {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 14px;
+        }
+
+        .read-button {
+            width: 100%;
+            border-radius: 10px;
+            font-weight: 800;
+        }
+
+        /* ======================================================
+           HIGHLIGHTING
+           ====================================================== */
+
+        /*
+            Yellow = main search text
+            Green = keyword
+        */
+
+        mark.search-highlight {
+            background: var(--search-highlight);
+            color: inherit;
+            font-weight: 900;
+            padding: 1px 3px;
+            border-radius: 4px;
+        }
+
+        mark.keyword-highlight {
+            background: var(--keyword-highlight);
+            color: inherit;
+            font-weight: 900;
+            padding: 1px 3px;
+            border-radius: 4px;
+        }
+
+        /* ======================================================
+           EMPTY / STATUS STATES
+           ====================================================== */
+
+        .empty-state {
+            text-align: center;
+            padding: 55px 20px;
+            color: var(--text-muted);
+            background: var(--card-bg);
+            border: 1px dashed var(--border);
+            border-radius: 18px;
+        }
+
+        .empty-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .status-box {
+            display: none;
+            margin-top: 14px;
+            border-radius: 10px;
+            font-size: 13px;
+        }
+
+        /* ======================================================
+           DARK MODE BUTTON
+           ====================================================== */
+
+        .theme-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            width: 48px;
+            height: 48px;
+            border: 0;
+            border-radius: 50%;
+            background: #111827;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ======================================================
+           LIST VIEW
+           ====================================================== */
+
+        .article-grid.list-view .article-card {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .article-grid.list-view .cover-wrapper {
+            width: 240px;
+            min-width: 240px;
+            height: 170px;
+        }
+
+        .article-grid.list-view .article-body {
+            flex: 1;
+        }
+
+        @media (max-width: 700px) {
+            .article-grid.list-view .article-card {
+                display: block;
+            }
+
+            .article-grid.list-view .cover-wrapper {
+                width: 100%;
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="page-shell">
+
+    <!-- =========================================================
+         BRAND / TEXT LOGO
+         ========================================================= -->
+
+    <header class="brand-area">
+
+        <h1 class="brand-logo">
+            <span class="brand-icon">
+                <i class="bi bi-search"></i>
+            </span>
+
+            Charlie MJ Medium Profile Article Search Engine
+        </h1>
+
+        <p class="brand-subtitle">
+            Search, filter and quickly discover articles from your Medium profile.
+        </p>
+
+    </header>
+
+
+    <!-- =========================================================
+         GITHUB PROFILE
+         =========================================================
+
+         The .png endpoint automatically displays the GitHub
+         account avatar associated with this username.
+    -->
+
+    <div class="github-profile">
+
+        <img
+            class="github-avatar"
+            src="https://github.com/awsrmmustansarjavaid.png?size=120"
+            alt="GitHub profile picture"
+            onerror="this.style.display='none';"
+        >
+
+        <div>
+            <div class="github-name">
+                awsrmustansarjavaid
+            </div>
+
+            <a
+                class="github-link"
+                href="https://github.com/awsrmmustansarjavaid"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <i class="bi bi-github"></i>
+                GitHub Profile
+            </a>
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         SEARCH PANEL
+         ========================================================= -->
+
+    <section class="search-panel">
+
+        <div class="row g-3">
+
+            <!-- Medium profile -->
+            <div class="col-12">
+
+                <label
+                    for="profileUrl"
+                    class="form-label"
+                >
+                    <i class="bi bi-person-circle"></i>
+                    Medium Profile URL
+                </label>
+
+                <input
+                    id="profileUrl"
+                    class="form-control"
+                    type="url"
+                    placeholder="https://medium.com/@YourUsername"
+                >
+
+            </div>
+
+
+            <!-- Main search -->
+            <div class="col-lg-6">
+
+                <label
+                    for="searchText"
+                    class="form-label"
+                >
+                    <i class="bi bi-search"></i>
+                    Search Article
+                </label>
+
+                <input
+                    id="searchText"
+                    class="form-control"
+                    type="text"
+                    placeholder="Example: Turkish negative words"
+                >
+
+                <div class="form-text">
+                    Main search terms are highlighted in
+                    <strong>yellow</strong>.
+                </div>
+
+            </div>
+
+
+            <!-- Keyword input -->
+            <div class="col-lg-6">
+
+                <label
+                    for="keywordInput"
+                    class="form-label"
+                >
+                    <i class="bi bi-tags"></i>
+                    Add Keyword
+                </label>
+
+                <div class="input-group">
+
+                    <input
+                        id="keywordInput"
+                        class="form-control"
+                        type="text"
+                        placeholder="Example: Turkish"
+                    >
+
+                    <button
+                        id="addKeywordBtn"
+                        class="btn btn-outline-success add-keyword-button"
+                        type="button"
+                    >
+                        <i class="bi bi-plus-lg"></i>
+                        Add
+                    </button>
+
+                </div>
+
+                <div class="form-text">
+                    Keyword matches are highlighted in
+                    <strong>green</strong>.
+                </div>
+
+                <!-- Dynamically generated keyword chips -->
+                <div
+                    id="keywordList"
+                    class="keyword-list"
+                ></div>
+
+            </div>
+
+
+            <!-- Search controls -->
+            <div class="col-12">
+
+                <div class="d-flex flex-wrap gap-2">
+
+                    <button
+                        id="searchBtn"
+                        class="btn btn-primary search-button px-4"
+                        type="button"
+                    >
+                        <i class="bi bi-search"></i>
+                        Search Medium
+                    </button>
+
+                    <button
+                        id="clearBtn"
+                        class="btn btn-outline-secondary px-4"
+                        type="button"
+                    >
+                        <i class="bi bi-x-circle"></i>
+                        Clear
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Status -->
+        <div
+            id="statusBox"
+            class="alert alert-secondary status-box"
+            role="alert"
+        ></div>
+
+    </section>
+
+
+    <!-- =========================================================
+         RESULTS TOOLBAR
+         ========================================================= -->
+
+    <div class="results-toolbar">
+
+        <div>
+            <h2 class="results-title">
+                Articles
+            </h2>
+
+            <div
+                id="resultCount"
+                class="result-count"
+            >
+                No search performed
+            </div>
+        </div>
+
+
+        <div class="d-flex gap-2">
+
+            <!-- Sort -->
+            <select
+                id="sortSelect"
+                class="form-select toolbar-select"
+                aria-label="Sort articles"
+            >
+                <option value="newest">
+                    Newest first
+                </option>
+
+                <option value="oldest">
+                    Oldest first
+                </option>
+
+                <option value="title">
+                    Title A–Z
+                </option>
+            </select>
+
+
+            <!-- Grid/List -->
+            <button
+                id="viewToggle"
+                class="btn btn-outline-secondary"
+                type="button"
+                title="Switch view"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         RESULTS
+         ========================================================= -->
+
+    <main
+        id="results"
+        class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 article-grid"
+    >
+
+        <div class="col-12">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="bi bi-journal-richtext"></i>
+                </div>
+
+                <h3 class="h5 fw-bold">
+                    Ready to search
+                </h3>
+
+                <p class="mb-0">
+                    Enter your Medium profile and search term above.
+                </p>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     DARK MODE BUTTON
+     ========================================================= -->
+
+<button
+    id="themeBtn"
+    class="theme-button"
+    type="button"
+    title="Toggle dark mode"
+    aria-label="Toggle dark mode"
+>
+    <i class="bi bi-moon-stars"></i>
+</button>
+
+
+<!-- Bootstrap JavaScript -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<script>
+/*
+================================================================
+CHARLIE MJ MEDIUM PROFILE ARTICLE SEARCH ENGINE
+JAVASCRIPT
+================================================================
+
+MAIN FEATURES
+--------------
+1. Medium profile URL
+2. Main article search
+3. Multiple keyword chips
+4. Add/remove keywords
+5. Search highlighting
+6. Keyword highlighting
+7. Cover image display
+8. Sort by date/title
+9. Grid/list view
+10. Dark mode
+11. Remember profile URL
+12. Clean responsive Bootstrap frontend
+
+IMPORTANT TECHNICAL NOTE
+------------------------
+A local browser-only HTML file cannot directly and reliably
+scrape an unlimited Medium archive because of browser CORS
+restrictions and Medium's changing page structure.
+
+This version uses Medium's RSS feed through rss2json.com.
+
+That means the number of searchable historical articles depends
+on what the Medium RSS feed exposes.
+
+The interface is intentionally designed so that a future local
+backend/archive index can be plugged into the same frontend.
+================================================================
+*/
+
+
+/* =============================================================
+   APPLICATION STATE
+   ============================================================= */
+
+let keywords = [];
+
+let allArticles = [];
+
+let currentView = "grid";
+
+
+/* =============================================================
+   DOM REFERENCES
+   ============================================================= */
+
+const profileUrlInput =
+    document.getElementById("profileUrl");
+
+const searchTextInput =
+    document.getElementById("searchText");
+
+const keywordInput =
+    document.getElementById("keywordInput");
+
+const keywordList =
+    document.getElementById("keywordList");
+
+const searchBtn =
+    document.getElementById("searchBtn");
+
+const clearBtn =
+    document.getElementById("clearBtn");
+
+const addKeywordBtn =
+    document.getElementById("addKeywordBtn");
+
+const results =
+    document.getElementById("results");
+
+const resultCount =
+    document.getElementById("resultCount");
+
+const statusBox =
+    document.getElementById("statusBox");
+
+const sortSelect =
+    document.getElementById("sortSelect");
+
+const viewToggle =
+    document.getElementById("viewToggle");
+
+const themeBtn =
+    document.getElementById("themeBtn");
+
+
+/* =============================================================
+   REMEMBER MEDIUM PROFILE URL
+   ============================================================= */
+
+const savedProfileUrl =
+    localStorage.getItem("charlieMediumProfileUrl");
+
+if (savedProfileUrl) {
+    profileUrlInput.value = savedProfileUrl;
+}
+
+
+/* =============================================================
+   TEXT NORMALIZATION
+   ============================================================= */
+
+function normalize(text) {
+
+    return String(text || "")
+        .toLowerCase()
+        .normalize("NFKC")
+        .trim();
+}
+
+
+/* =============================================================
+   HTML ESCAPING
+   ============================================================= */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =============================================================
+   BUILD MEDIUM RSS URL
+   ============================================================= */
+
+function buildFeedUrl(profileUrl) {
+
+    let cleanUrl =
+        profileUrl.trim();
+
+    if (!cleanUrl) {
+        throw new Error(
+            "Please enter your Medium profile URL."
+        );
+    }
+
+    if (!/^https?:\/\//i.test(cleanUrl)) {
+        cleanUrl = "https://" + cleanUrl;
+    }
+
+    let url;
+
+    try {
+        url = new URL(cleanUrl);
+    } catch {
+        throw new Error(
+            "The Medium profile URL is not valid."
+        );
+    }
+
+
+    /*
+        Standard Medium profile:
+            https://medium.com/@username
+    */
+
+    if (url.hostname === "medium.com") {
+
+        const parts =
+            url.pathname
+                .split("/")
+                .filter(Boolean);
+
+        if (
+            parts.length === 0 ||
+            !parts[0].startsWith("@")
+        ) {
+            throw new Error(
+                "Use a profile URL such as https://medium.com/@username"
+            );
+        }
+
+        return "https://medium.com/feed/" + parts[0];
+    }
+
+
+    /*
+        Medium custom publication/profile domain:
+            https://username.medium.com
+    */
+
+    if (
+        url.hostname.endsWith(".medium.com")
+    ) {
+        return (
+            "https://" +
+            url.hostname +
+            "/feed"
+        );
+    }
+
+
+    throw new Error(
+        "Please enter a valid Medium profile URL."
+    );
+}
+
+
+/* =============================================================
+   ADD KEYWORD
+   ============================================================= */
+
+function addKeyword() {
+
+    const value =
+        keywordInput.value.trim();
+
+    if (!value) {
+        return;
+    }
+
+    const normalized =
+        normalize(value);
+
+    /*
+        Prevent duplicate keywords.
+    */
+    if (
+        keywords.some(
+            keyword =>
+                normalize(keyword) === normalized
+        )
+    ) {
+        keywordInput.value = "";
+        return;
+    }
+
+    keywords.push(value);
+
+    keywordInput.value = "";
+
+    renderKeywordChips();
+}
+
+
+/* =============================================================
+   REMOVE KEYWORD
+   ============================================================= */
+
+function removeKeyword(index) {
+
+    keywords.splice(index, 1);
+
+    renderKeywordChips();
+
+    /*
+        If articles are already loaded, immediately re-filter.
+    */
+    if (allArticles.length > 0) {
+        applyFiltersAndRender();
+    }
+}
+
+
+/* =============================================================
+   RENDER KEYWORD CHIPS
+   ============================================================= */
+
+function renderKeywordChips() {
+
+    if (keywords.length === 0) {
+
+        keywordList.innerHTML = "";
+
+        return;
+    }
+
+    keywordList.innerHTML =
+        keywords.map(
+            (keyword, index) => `
+
+                <span class="keyword-chip">
+
+                    <i class="bi bi-tag-fill"></i>
+
+                    ${escapeHtml(keyword)}
+
+                    <button
+                        type="button"
+                        title="Remove keyword"
+                        aria-label="Remove keyword"
+                        onclick="removeKeyword(${index})"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+
+                </span>
+            `
+        ).join("");
+}
+
+
+/* =============================================================
+   STRIP HTML FROM RSS DESCRIPTION
+   ============================================================= */
+
+function stripHtml(html) {
+
+    const element =
+        document.createElement("div");
+
+    element.innerHTML =
+        html || "";
+
+    return (
+        element.textContent ||
+        element.innerText ||
+        ""
+    )
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+
+/* =============================================================
+   CREATE SEARCHABLE ARTICLE TEXT
+   ============================================================= */
+
+function searchableArticleText(article) {
+
+    return normalize(
+        [
+            article.title,
+            article.description,
+            article.content
+        ].join(" ")
+    );
+}
+
+
+/* =============================================================
+   ARTICLE MATCHING
+   ============================================================= */
+
+function articleMatches(
+    article,
+    mainSearch,
+    selectedKeywords
+) {
+
+    const text =
+        searchableArticleText(article);
+
+    /*
+        Main search:
+        If empty, don't restrict by it.
+    */
+    if (
+        mainSearch &&
+        !text.includes(normalize(mainSearch))
+    ) {
+        return false;
+    }
+
+
+    /*
+        Multiple keywords:
+        All keyword filters must match.
+
+        Example:
+            Turkish
+            grammar
+            negative
+
+        An article must contain all three.
+    */
+    for (const keyword of selectedKeywords) {
+
+        if (
+            !text.includes(normalize(keyword))
+        ) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
+/* =============================================================
+   HIGHLIGHT TEXT
+   ============================================================= */
+
+function highlightText(
+    text,
+    mainSearch,
+    selectedKeywords
+) {
+
+    let safeText =
+        escapeHtml(text);
+
+    /*
+        Build terms from the main search and all keywords.
+        Longest terms are processed first so that larger phrases
+        are highlighted correctly.
+    */
+
+    const terms = [];
+
+    if (mainSearch.trim()) {
+        terms.push({
+            value: mainSearch.trim(),
+            className: "search-highlight"
+        });
+    }
+
+    selectedKeywords.forEach(keyword => {
+        if (keyword.trim()) {
+            terms.push({
+                value: keyword.trim(),
+                className: "keyword-highlight"
+            });
+        }
+    });
+
+
+    /*
+        Remove duplicate terms.
+    */
+    const uniqueTerms = [];
+
+    for (const item of terms) {
+
+        const exists =
+            uniqueTerms.some(
+                existing =>
+                    normalize(existing.value) ===
+                    normalize(item.value)
+            );
+
+        if (!exists) {
+            uniqueTerms.push(item);
+        }
+    }
+
+
+    /*
+        Highlight longer phrases first.
+    */
+    uniqueTerms.sort(
+        (a, b) =>
+            b.value.length -
+            a.value.length
+    );
+
+
+    /*
+        We temporarily protect already-created marks
+        to prevent overlapping replacements.
+    */
+    const placeholders = [];
+
+
+    uniqueTerms.forEach((item, index) => {
+
+        const placeholder =
+            `___HIGHLIGHT_${index}_${placeholders.length}___`;
+
+        /*
+            Escape special regex characters.
+        */
+        const escapedTerm =
+            item.value.replace(
+                /[.*+?^${}()|[\]\\]/g,
+                "\\$&"
+            );
+
+        const regex =
+            new RegExp(
+                escapedTerm,
+                "gi"
+            );
+
+        if (regex.test(safeText)) {
+
+            safeText =
+                safeText.replace(
+                    regex,
+                    match => {
+
+                        const token =
+                            `@@@${placeholders.length}@@@`;
+
+                        placeholders.push({
+                            token,
+                            html:
+                                `<mark class="${item.className}">${match}</mark>`
+                        });
+
+                        return token;
+                    }
+                );
+        }
+    });
+
+
+    /*
+        Restore placeholders.
+    */
+    placeholders.forEach(item => {
+
+        safeText =
+            safeText.replaceAll(
+                item.token,
+                item.html
+            );
+    });
+
+    return safeText;
+}
+
+
+/* =============================================================
+   FORMAT DATE
+   ============================================================= */
+
+function formatDate(dateValue) {
+
+    if (!dateValue) {
+        return "Date unavailable";
+    }
+
+    const date =
+        new Date(dateValue);
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "Date unavailable";
+    }
+
+    return date.toLocaleDateString(
+        undefined,
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+}
+
+
+/* =============================================================
+   FALLBACK COVER
+   ============================================================= */
+
+function extractImageFromHtml(html) {
+
+    /*
+        Medium's RSS feed (via rss2json) usually leaves the
+        "thumbnail" field empty. The real cover image is still
+        present, but embedded as an <img> tag inside the
+        article's HTML "content" / "description" field instead.
+
+        Medium also injects a hidden 1x1 tracking pixel as the
+        very first <img> in that HTML, so we skip any image
+        that is obviously just a tracking pixel and return the
+        first real-looking image we find.
+    */
+
+    if (!html) {
+        return "";
+    }
+
+    const imgTagPattern = /<img[^>]*>/gi;
+    const srcPattern = /src=["']([^"']+)["']/i;
+    const widthPattern = /width=["']?(\d+)["']?/i;
+    const heightPattern = /height=["']?(\d+)["']?/i;
+
+    const imgTags =
+        html.match(imgTagPattern) || [];
+
+    for (const tag of imgTags) {
+
+        const srcMatch =
+            tag.match(srcPattern);
+
+        if (!srcMatch) {
+            continue;
+        }
+
+        const src = srcMatch[1];
+
+        const widthMatch =
+            tag.match(widthPattern);
+
+        const heightMatch =
+            tag.match(heightPattern);
+
+        const width =
+            widthMatch ? parseInt(widthMatch[1], 10) : null;
+
+        const height =
+            heightMatch ? parseInt(heightMatch[1], 10) : null;
+
+        const isTrackingPixel =
+            (width !== null && width <= 2) ||
+            (height !== null && height <= 2) ||
+            src.includes("stat.medium.com") ||
+            src.includes("/stat?event=");
+
+        if (isTrackingPixel) {
+            continue;
+        }
+
+        return src;
+    }
+
+    return "";
+}
+
+
+function coverMarkup(article) {
+
+    /*
+        RSS services may expose an image through:
+            thumbnail
+            enclosure.link
+            media:content
+            an <img> tag inside content/description
+
+        Different feeds expose different fields, and Medium's
+        feed (through rss2json) generally only exposes the
+        cover picture inside the HTML content, not "thumbnail".
+    */
+
+    const image =
+        article.thumbnail ||
+        (
+            article.enclosure &&
+            article.enclosure.link
+        ) ||
+        extractImageFromHtml(article.content) ||
+        extractImageFromHtml(article.description) ||
+        "";
+
+    if (!image) {
+
+        return `
+            <div class="cover-placeholder">
+                <i class="bi bi-file-earmark-text"></i>
+            </div>
+        `;
+    }
+
+    return `
+        <img
+            class="cover-image"
+            src="${escapeHtml(image)}"
+            alt="Article cover"
+            loading="lazy"
+            onerror="
+                this.outerHTML =
+                '<div class=&quot;cover-placeholder&quot;><i class=&quot;bi bi-file-earmark-text&quot;></i></div>';
+            "
+        >
+    `;
+}
+
+
+/* =============================================================
+   SORT ARTICLES
+   ============================================================= */
+
+function sortArticles(articleArray) {
+
+    const sorted =
+        [...articleArray];
+
+    const sort =
+        sortSelect.value;
+
+
+    if (sort === "newest") {
+
+        sorted.sort(
+            (a, b) =>
+                new Date(b.pubDate) -
+                new Date(a.pubDate)
+        );
+
+    } else if (sort === "oldest") {
+
+        sorted.sort(
+            (a, b) =>
+                new Date(a.pubDate) -
+                new Date(b.pubDate)
+        );
+
+    } else if (sort === "title") {
+
+        sorted.sort(
+            (a, b) =>
+                String(a.title || "")
+                    .localeCompare(
+                        String(b.title || ""),
+                        undefined,
+                        {
+                            sensitivity: "base"
+                        }
+                    )
+        );
+    }
+
+    return sorted;
+}
+
+
+/* =============================================================
+   RENDER ARTICLES
+   ============================================================= */
+
+function renderArticles(articleArray) {
+
+    const mainSearch =
+        searchTextInput.value.trim();
+
+    const sorted =
+        sortArticles(articleArray);
+
+    resultCount.textContent =
+        `${sorted.length} matching article${sorted.length === 1 ? "" : "s"}`;
+
+
+    if (sorted.length === 0) {
+
+        results.className =
+            "row article-grid";
+
+        results.innerHTML = `
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                    <h3 class="h5 fw-bold">
+                        No matching articles
+                    </h3>
+
+                    <p class="mb-0">
+                        Try another search term or remove a keyword filter.
+                    </p>
+
+                </div>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    results.innerHTML =
+        sorted.map(article => {
+
+            const title =
+                highlightText(
+                    article.title || "Untitled Article",
+                    mainSearch,
+                    keywords
+                );
+
+            const safeUrl =
+                escapeHtml(
+                    article.link || "#"
+                );
+
+            return `
+
+                <div class="col">
+
+                    <article class="article-card">
+
+                        <div class="cover-wrapper">
+                            ${coverMarkup(article)}
+                        </div>
+
+                        <div class="article-body">
+
+                            <h3 class="article-title">
+
+                                <a
+                                    href="${safeUrl}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    ${title}
+                                </a>
+
+                            </h3>
+
+                            <div class="article-date">
+                                <i class="bi bi-calendar3"></i>
+                                ${formatDate(article.pubDate)}
+                            </div>
+
+                            <a
+                                href="${safeUrl}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="btn btn-dark read-button"
+                            >
+                                <i class="bi bi-box-arrow-up-right"></i>
+                                Open Article
+                            </a>
+
+                        </div>
+
+                    </article>
+
+                </div>
+            `;
+
+        }).join("");
+
+
+    /*
+        Reapply the selected view after rendering.
+    */
+    if (currentView === "list") {
+        results.classList.add("list-view");
+    } else {
+        results.classList.remove("list-view");
+    }
+}
+
+
+/* =============================================================
+   APPLY FILTERS
+   ============================================================= */
+
+function applyFiltersAndRender() {
+
+    const mainSearch =
+        normalize(
+            searchTextInput.value
+        );
+
+    const filtered =
+        allArticles.filter(
+            article =>
+                articleMatches(
+                    article,
+                    mainSearch,
+                    keywords
+                )
+        );
+
+    renderArticles(filtered);
+}
+
+
+/* =============================================================
+   SEARCH MEDIUM
+   ============================================================= */
+
+async function searchMedium() {
+
+    const profileUrl =
+        profileUrlInput.value.trim();
+
+    const mainSearch =
+        searchTextInput.value.trim();
+
+
+    /*
+        At least one search criterion is required.
+    */
+    if (
+        !mainSearch &&
+        keywords.length === 0
+    ) {
+
+        showStatus(
+            "Enter a search term or add at least one keyword.",
+            "warning"
+        );
+
+        return;
+    }
+
+
+    try {
+
+        const feedUrl =
+            buildFeedUrl(profileUrl);
+
+
+        /*
+            Save profile URL for the next visit.
+        */
+        localStorage.setItem(
+            "charlieMediumProfileUrl",
+            profileUrl
+        );
+
+
+        searchBtn.disabled = true;
+
+        searchBtn.innerHTML = `
+            <span
+                class="spinner-border spinner-border-sm me-1"
+                aria-hidden="true"
+            ></span>
+            Searching...
+        `;
+
+
+        showStatus(
+            "Loading articles from the Medium RSS feed...",
+            "secondary"
+        );
+
+
+        /*
+            rss2json is used as a browser-friendly bridge.
+        */
+        const apiUrl =
+            "https://api.rss2json.com/v1/api.json?rss_url=" +
+            encodeURIComponent(feedUrl);
+
+
+        const response =
+            await fetch(
+                apiUrl,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                `RSS service returned HTTP ${response.status}.`
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            data.status !== "ok"
+        ) {
+
+            throw new Error(
+                data.message ||
+                "The Medium RSS feed could not be loaded."
+            );
+        }
+
+
+        allArticles =
+            Array.isArray(data.items)
+                ? data.items
+                : [];
+
+
+        applyFiltersAndRender();
+
+
+        showStatus(
+            `Search completed. ${allArticles.length} article(s) were retrieved from the Medium feed.`,
+            "success"
+        );
+
+
+    } catch (error) {
+
+        allArticles = [];
+
+        results.innerHTML = `
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+
+                    <h3 class="h5 fw-bold">
+                        Search could not be completed
+                    </h3>
+
+                    <p class="mb-0">
+                        ${escapeHtml(error.message)}
+                    </p>
+
+                </div>
+
+            </div>
+        `;
+
+        resultCount.textContent =
+            "Search failed";
+
+        showStatus(
+            error.message,
+            "danger"
+        );
+
+
+    } finally {
+
+        searchBtn.disabled = false;
+
+        searchBtn.innerHTML = `
+            <i class="bi bi-search"></i>
+            Search Medium
+        `;
+    }
+}
+
+
+/* =============================================================
+   STATUS MESSAGE
+   ============================================================= */
+
+function showStatus(
+    message,
+    type
+) {
+
+    statusBox.className =
+        `alert alert-${type} status-box`;
+
+    statusBox.textContent =
+        message;
+
+    statusBox.style.display =
+        "block";
+}
+
+
+/* =============================================================
+   CLEAR SEARCH
+   ============================================================= */
+
+function clearSearch() {
+
+    searchTextInput.value = "";
+
+    keywordInput.value = "";
+
+    keywords = [];
+
+    allArticles = [];
+
+    renderKeywordChips();
+
+
+    results.className =
+        "row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 article-grid";
+
+
+    results.innerHTML = `
+
+        <div class="col-12">
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    <i class="bi bi-journal-richtext"></i>
+                </div>
+
+                <h3 class="h5 fw-bold">
+                    Ready to search
+                </h3>
+
+                <p class="mb-0">
+                    Enter your Medium profile and search term above.
+                </p>
+
+            </div>
+
+        </div>
+    `;
+
+
+    resultCount.textContent =
+        "No search performed";
+
+    statusBox.style.display =
+        "none";
+}
+
+
+/* =============================================================
+   GRID / LIST TOGGLE
+   ============================================================= */
+
+function toggleView() {
+
+    currentView =
+        currentView === "grid"
+            ? "list"
+            : "grid";
+
+
+    if (
+        currentView === "list"
+    ) {
+
+        results.classList.add(
+            "list-view"
+        );
+
+        viewToggle.innerHTML =
+            '<i class="bi bi-grid-3x3-gap"></i>';
+
+        viewToggle.title =
+            "Switch to grid view";
+
+    } else {
+
+        results.classList.remove(
+            "list-view"
+        );
+
+        viewToggle.innerHTML =
+            '<i class="bi bi-list"></i>';
+
+        viewToggle.title =
+            "Switch to list view";
+    }
+}
+
+
+/* =============================================================
+   DARK MODE
+   ============================================================= */
+
+const savedTheme =
+    localStorage.getItem(
+        "charlieMediumTheme"
+    );
+
+if (
+    savedTheme === "dark"
+) {
+    document.body.classList.add(
+        "dark-mode"
+    );
+
+    themeBtn.innerHTML =
+        '<i class="bi bi-sun"></i>';
+}
+
+
+function toggleTheme() {
+
+    document.body.classList.toggle(
+        "dark-mode"
+    );
+
+
+    const dark =
+        document.body.classList.contains(
+            "dark-mode"
+        );
+
+
+    localStorage.setItem(
+        "charlieMediumTheme",
+        dark ? "dark" : "light"
+    );
+
+
+    themeBtn.innerHTML =
+        dark
+            ? '<i class="bi bi-sun"></i>'
+            : '<i class="bi bi-moon-stars"></i>';
+}
+
+
+/* =============================================================
+   EVENT LISTENERS
+   ============================================================= */
+
+searchBtn.addEventListener(
+    "click",
+    searchMedium
+);
+
+
+clearBtn.addEventListener(
+    "click",
+    clearSearch
+);
+
+
+addKeywordBtn.addEventListener(
+    "click",
+    addKeyword
+);
+
+
+keywordInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter"
+        ) {
+            event.preventDefault();
+            addKeyword();
+        }
+    }
+);
+
+
+searchTextInput.addEventListener(
+    "keydown",
+    event => {
+
+        if (
+            event.key === "Enter"
+        ) {
+            event.preventDefault();
+            searchMedium();
+        }
+    }
+);
+
+
+profileUrlInput.addEventListener(
+    "change",
+    () => {
+
+        localStorage.setItem(
+            "charlieMediumProfileUrl",
+            profileUrlInput.value.trim()
+        );
+    }
+);
+
+
+sortSelect.addEventListener(
+    "change",
+    () => {
+
+        if (
+            allArticles.length > 0
+        ) {
+            applyFiltersAndRender();
+        }
+    }
+);
+
+
+viewToggle.addEventListener(
+    "click",
+    toggleView
+);
+
+
+themeBtn.addEventListener(
+    "click",
+    toggleTheme
+);
+
+
+/*
+================================================================
+END OF APPLICATION
+================================================================
+*/
+</script>
+
+</body>
+</html>
