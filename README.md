@@ -1,6 +1,6 @@
 # Charlie MJ Medium Profile Article Search Engine
 
-[Charlie MJ Medium Profile Article Search Engine](./assets/cover-pic.png)
+![Charlie MJ Medium Profile Article Search Engine](./assets/cover-pic.png)
 
 A lightweight, single-file web app that lets you search, filter, and browse articles from any public Medium profile — with live keyword highlighting, cover images, sorting, grid/list views, and dark mode. No backend, no build step, no dependencies to install. Just open the HTML file and go.
 
