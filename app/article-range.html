@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Responsive layout -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Page description -->
+    <meta
+        name="description"
+        content="Medium Article Range Explorer for chronological article discovery, search, filtering, statistics, favorites and comparison."
+    >
+
+    <meta name="theme-color" content="#7c3aed">
+
+    <title>Medium Article Range Explorer</title>
+
+    <!-- ============================================================
+         BOOTSTRAP
+         ============================================================ -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- ============================================================
+         BOOTSTRAP ICONS
+         ============================================================ -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- ============================================================
+         CUSTOM APPLICATION CSS
+         ============================================================ -->
+    <link rel="stylesheet" href="css/article-range.css">
+</head>
+
+<body>
+
+<!-- ================================================================
+     DECORATIVE BACKGROUND
+     ================================================================ -->
+<div class="background-grid"></div>
+<div class="background-decoration-one"></div>
+<div class="background-decoration-two"></div>
+<div class="background-decoration-three"></div>
+
+<div class="app-shell">
+
+    <!-- ============================================================
+         NAVIGATION
+         ============================================================ -->
+    <nav class="navbar navbar-expand-lg app-navbar">
+        <div class="container-fluid">
+
+            <a class="navbar-brand app-brand" href="../index.html">
+                <span class="brand-icon">
+                    <i class="bi bi-journal-richtext"></i>
+                </span>
+
+                <span>
+                    <strong>Medium Article Explorer</strong>
+                    <small>Article Range</small>
+                </span>
+            </a>
+
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mainNavigation"
+                aria-controls="mainNavigation"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">
+                            <i class="bi bi-search"></i>
+                            Article Search
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="article-range.html">
+                            <i class="bi bi-collection"></i>
+                            Article Range
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <button
+                            type="button"
+                            id="themeButton"
+                            class="theme-button"
+                            title="Switch to dark mode"
+                            aria-label="Switch theme"
+                        >
+                            <i class="bi bi-moon-stars"></i>
+                        </button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- ============================================================
+         GITHUB PROFILE HEADER
+         ============================================================ -->
+    <section class="github-profile-card">
+
+        <div class="github-profile-left">
+
+            <div class="github-avatar-wrapper">
+                <img
+                    id="githubAvatar"
+                    src=""
+                    alt="GitHub profile picture"
+                    class="github-avatar"
+                    loading="lazy"
+                >
+
+                <div
+                    id="githubAvatarFallback"
+                    class="github-avatar-fallback"
+                >
+                    <i class="bi bi-github"></i>
+                </div>
+            </div>
+
+            <div class="github-profile-info">
+
+                <span class="profile-label">
+                    <i class="bi bi-github"></i>
+                    DEVELOPER PROFILE
+                </span>
+
+                <h2 id="githubName">
+                    aws-rm-mustansar-javaid
+                </h2>
+
+                <p id="githubBio">
+                    Medium Article Archive & Developer Explorer
+                </p>
+
+                <div class="github-meta">
+                    <span>
+                        <i class="bi bi-code-slash"></i>
+                        GitHub
+                    </span>
+
+                    <span id="githubRepos">
+                        Public repositories
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <a
+            id="githubProfileLink"
+            class="github-profile-link"
+            href="https://github.com/awsrmmustansarjavaid"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <i class="bi bi-box-arrow-up-right"></i>
+            GitHub Profile
+        </a>
+
+    </section>
+
+
+    <!-- ============================================================
+         HERO
+         ============================================================ -->
+    <header class="hero-section">
+
+        <div class="hero-icon">
+            <i class="bi bi-clock-history"></i>
+        </div>
+
+        <span class="hero-badge">
+            <i class="bi bi-stars"></i>
+            CHRONOLOGICAL ARTICLE EXPLORER
+        </span>
+
+        <h1>
+            Medium Article Range Explorer
+        </h1>
+
+        <p class="hero-description">
+            Explore a Medium profile's article archive by permanent
+            publication number, keywords, dates, topics, reading time,
+            popularity and more.
+        </p>
+
+        <div class="hero-example">
+
+            <div>
+                <strong>
+                    <i class="bi bi-1-circle"></i>
+                    #1
+                </strong>
+                Oldest available article
+            </div>
+
+            <div>
+                <strong>
+                    <i class="bi bi-arrow-right"></i>
+                    #2
+                </strong>
+                Second article
+            </div>
+
+            <div>
+                <strong>
+                    <i class="bi bi-arrow-right"></i>
+                    #N
+                </strong>
+                Newest available article
+            </div>
+
+        </div>
+    </header>
+
+
+    <!-- ============================================================
+         PROFILE / ARCHIVE CONTROL PANEL
+         ============================================================ -->
+    <section class="control-card">
+
+        <div class="section-heading">
+            <span class="section-kicker">
+                ARTICLE ARCHIVE
+            </span>
+
+            <h2>
+                <i class="bi bi-sliders"></i>
+                Explore Your Article Archive
+            </h2>
+
+            <p>
+                Load the local archive first. If it is empty, the
+                application can fall back to the Medium RSS feed.
+            </p>
+        </div>
+
+
+        <!-- ========================================================
+             PROFILE URL
+             ======================================================== -->
+        <div class="mb-4">
+
+            <label for="profileUrl" class="form-label">
+                <i class="bi bi-link-45deg"></i>
+                Medium Profile URL
+            </label>
+
+            <div class="input-group input-group-lg">
+
+                <span class="input-group-text">
+                    <i class="bi bi-medium"></i>
+                </span>
+
+                <input
+                    type="url"
+                    id="profileUrl"
+                    class="form-control"
+                    placeholder="https://medium.com/@username"
+                    autocomplete="url"
+                >
+
+            </div>
+
+            <div class="form-text">
+                Example:
+                https://medium.com/@username
+            </div>
+        </div>
+
+
+        <!-- ========================================================
+             DISCOVERY MODE
+             ======================================================== -->
+        <div class="control-section">
+
+            <label for="discoveryMode" class="control-label">
+                <i class="bi bi-compass"></i>
+                Article Order / Discovery Mode
+            </label>
+
+            <select id="discoveryMode" class="form-select">
+                <option value="oldest">
+                    🕰️ Oldest → Newest
+                </option>
+
+                <option value="newest">
+                    🆕 Recent Published
+                </option>
+
+                <option value="views">
+                    🔥 Most Viewed
+                </option>
+
+                <option value="reads">
+                    📖 Most Read
+                </option>
+
+                <option value="comments">
+                    💬 Most Commented
+                </option>
+
+                <option value="claps">
+                    👏 Most Clapped / Recommended
+                </option>
+            </select>
+
+            <small class="control-help">
+                Popularity modes require the corresponding metric
+                to exist in articles.json.
+            </small>
+
+        </div>
+
+
+        <!-- ========================================================
+             MULTI-KEYWORD SEARCH
+             ======================================================== -->
+        <div class="control-section">
+
+            <label for="keywordInput" class="control-label">
+                <i class="bi bi-search"></i>
+                Multi-Keyword Search
+            </label>
+
+            <input
+                type="text"
+                id="keywordInput"
+                class="form-control"
+                placeholder='AWS Terraform Docker or "AWS DevOps" -Azure'
+                autocomplete="off"
+            >
+
+            <div class="keyword-options">
+
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="keywordMode"
+                        value="any"
+                        checked
+                    >
+                    <span class="form-check-label">
+                        ANY / OR
+                    </span>
+                </label>
+
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="keywordMode"
+                        value="all"
+                    >
+                    <span class="form-check-label">
+                        ALL / AND
+                    </span>
+                </label>
+
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="keywordMode"
+                        value="exact"
+                    >
+                    <span class="form-check-label">
+                        Exact phrase
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="search-help">
+                <span>
+                    <code>AWS Terraform</code>
+                    searches multiple terms.
+                </span>
+
+                <span>
+                    <code>"AWS DevOps"</code>
+                    searches an exact phrase.
+                </span>
+
+                <span>
+                    <code>-Azure</code>
+                    excludes a term.
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             SEARCH FIELD
+             ======================================================== -->
+        <div class="control-section">
+
+            <label class="control-label">
+                <i class="bi bi-search-heart"></i>
+                Search Location
+            </label>
+
+            <div class="search-location-options">
+
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="searchScope"
+                        value="title"
+                    >
+                    <span class="form-check-label">
+                        Title only
+                    </span>
+                </label>
+
+                <label class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="searchScope"
+                        value="title-content"
+                        checked
+                    >
+                    <span class="form-check-label">
+                        Title + content
+                    </span>
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             SORT SELECTOR
+             ======================================================== -->
+        <div class="control-section">
+
+            <label for="sortSelector" class="control-label">
+                <i class="bi bi-sort-down"></i>
+                Sort Results
+            </label>
+
+            <select id="sortSelector" class="form-select">
+
+                <option value="archive">
+                    Permanent Article Number
+                </option>
+
+                <option value="newest">
+                    Newest → Oldest
+                </option>
+
+                <option value="oldest">
+                    Oldest → Newest
+                </option>
+
+                <option value="title-asc">
+                    Title A → Z
+                </option>
+
+                <option value="title-desc">
+                    Title Z → A
+                </option>
+
+                <option value="views">
+                    Most Viewed
+                </option>
+
+                <option value="reads">
+                    Most Read
+                </option>
+
+                <option value="comments">
+                    Most Commented
+                </option>
+
+                <option value="claps">
+                    Most Clapped
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ========================================================
+             DATE FILTERS
+             ======================================================== -->
+        <div class="control-section">
+
+            <div class="control-label">
+                <i class="bi bi-calendar3"></i>
+                Publication Date Filters
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-6 col-lg-3">
+
+                    <label for="fromYear" class="form-label">
+                        From Year
+                    </label>
+
+                    <select id="fromYear" class="form-select">
+                        <option value="">All Years</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <label for="fromMonth" class="form-label">
+                        From Month
+                    </label>
+
+                    <select id="fromMonth" class="form-select">
+                        <option value="">All Months</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <label for="toYear" class="form-label">
+                        To Year
+                    </label>
+
+                    <select id="toYear" class="form-select">
+                        <option value="">All Years</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <label for="toMonth" class="form-label">
+                        To Month
+                    </label>
+
+                    <select id="toMonth" class="form-select">
+                        <option value="">All Months</option>
+                    </select>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label for="fromDate" class="form-label">
+                        Custom From Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="fromDate"
+                        class="form-control"
+                    >
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label for="toDate" class="form-label">
+                        Custom To Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="toDate"
+                        class="form-control"
+                    >
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             READING TIME FILTER
+             ======================================================== -->
+        <div class="control-section">
+
+            <label for="readingTimeFilter" class="control-label">
+                <i class="bi bi-hourglass-split"></i>
+                Reading Time
+            </label>
+
+            <select id="readingTimeFilter" class="form-select">
+
+                <option value="all">
+                    All Reading Times
+                </option>
+
+                <option value="short">
+                    Short — under 5 minutes
+                </option>
+
+                <option value="medium">
+                    Medium — 5 to 10 minutes
+                </option>
+
+                <option value="long">
+                    Long — 10+ minutes
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ========================================================
+             TOPIC FILTER
+             ======================================================== -->
+        <div class="control-section">
+
+            <label for="topicFilter" class="control-label">
+                <i class="bi bi-tags"></i>
+                Topic / Category
+            </label>
+
+            <select id="topicFilter" class="form-select">
+                <option value="">All Topics</option>
+            </select>
+
+        </div>
+
+
+        <!-- ========================================================
+             RANGE SELECTION
+             ======================================================== -->
+        <div class="control-section">
+
+            <div class="control-label">
+                <i class="bi bi-list-ol"></i>
+                Article Number Range
+            </div>
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label for="fromArticle" class="form-label">
+                        From Article
+                    </label>
+
+                    <input
+                        type="number"
+                        id="fromArticle"
+                        class="form-control form-control-lg"
+                        value="1"
+                        min="1"
+                        step="1"
+                    >
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label for="toArticle" class="form-label">
+                        To Article
+                    </label>
+
+                    <input
+                        type="number"
+                        id="toArticle"
+                        class="form-control form-control-lg"
+                        value="10"
+                        min="1"
+                        step="1"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div id="rangePreview" class="range-preview">
+
+                <i class="bi bi-arrow-right-circle"></i>
+
+                <strong id="rangePreviewText">
+                    Articles 1–10
+                </strong>
+
+            </div>
+
+
+            <!-- ====================================================
+                 QUICK RANGES
+                 ==================================================== -->
+            <div class="quick-ranges">
+
+                <span class="quick-ranges-label">
+                    Quick ranges:
+                </span>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="1"
+                    data-to="10"
+                >
+                    1–10
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="11"
+                    data-to="20"
+                >
+                    11–20
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="21"
+                    data-to="30"
+                >
+                    21–30
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="31"
+                    data-to="50"
+                >
+                    31–50
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="51"
+                    data-to="100"
+                >
+                    51–100
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="101"
+                    data-to="150"
+                >
+                    101–150
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="151"
+                    data-to="200"
+                >
+                    151–200
+                </button>
+
+                <button
+                    type="button"
+                    class="btn quick-range-btn"
+                    data-from="last"
+                    data-to="last"
+                >
+                    Last 10
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             ACTION BUTTONS
+             ======================================================== -->
+        <div class="action-row">
+
+            <button
+                type="button"
+                id="loadArticlesBtn"
+                class="btn btn-primary btn-lg"
+            >
+                <i class="bi bi-search"></i>
+                Show Articles
+            </button>
+
+            <button
+                type="button"
+                id="resetRangeBtn"
+                class="btn btn-outline-secondary btn-lg"
+            >
+                <i class="bi bi-arrow-counterclockwise"></i>
+                Reset
+            </button>
+
+        </div>
+
+
+        <!-- ========================================================
+             STATUS
+             ======================================================== -->
+        <div
+            id="statusBox"
+            class="alert status-box"
+            role="alert"
+            style="display:none;"
+        ></div>
+
+    </section>
+
+
+    <!-- ============================================================
+         PROFILE STATISTICS DASHBOARD
+         ============================================================ -->
+    <section class="statistics-section">
+
+        <div class="section-heading compact">
+            <span class="section-kicker">
+                ARCHIVE INTELLIGENCE
+            </span>
+
+            <h2>
+                <i class="bi bi-bar-chart-line"></i>
+                Profile Statistics
+            </h2>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-file-text"></i>
+                </div>
+
+                <div>
+                    <span>Articles</span>
+                    <strong id="statArticleCount">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-calendar-range"></i>
+                </div>
+
+                <div>
+                    <span>Years Active</span>
+                    <strong id="statYearsActive">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-tags"></i>
+                </div>
+
+                <div>
+                    <span>Topics</span>
+                    <strong id="statTopicCount">0</strong>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="bi bi-calendar-star"></i>
+                </div>
+
+                <div>
+                    <span>Most Active Year</span>
+                    <strong id="statActiveYear">—</strong>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             YEAR TIMELINE
+             ======================================================== -->
+        <div class="timeline-card">
+
+            <div class="timeline-header">
+
+                <div>
+                    <span class="section-kicker">
+                        PUBLICATION TIMELINE
+                    </span>
+
+                    <h3>
+                        Articles by Year
+                    </h3>
+                </div>
+
+            </div>
+
+            <div id="publicationTimeline" class="timeline-list">
+
+                <div class="timeline-empty">
+                    Load an archive to see publication activity.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         RESULTS
+         ============================================================ -->
+    <section class="results-section">
+
+        <div class="results-toolbar">
+
+            <div class="results-title-area">
+
+                <span class="section-kicker">
+                    ARTICLE RESULTS
+                </span>
+
+                <h2>
+                    Articles
+                    <span id="selectedRangeLabel">
+                        1–10
+                    </span>
+                </h2>
+
+                <p id="resultSummary">
+                    Enter a Medium profile to begin.
+                </p>
+
+            </div>
+
+
+            <div class="results-actions">
+
+                <div class="result-stat">
+                    <span>Visible</span>
+                    <strong id="visibleArticleCount">
+                        0
+                    </strong>
+                </div>
+
+                <button
+                    type="button"
+                    id="gridViewButton"
+                    class="view-button active"
+                    title="Grid view"
+                    aria-label="Grid view"
+                >
+                    <i class="bi bi-grid-3x3-gap"></i>
+                </button>
+
+                <button
+                    type="button"
+                    id="listViewButton"
+                    class="view-button"
+                    title="List view"
+                    aria-label="List view"
+                >
+                    <i class="bi bi-list"></i>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================================
+             RESULTS NAVIGATION
+             ======================================================== -->
+        <div class="range-navigation">
+
+            <button
+                type="button"
+                id="previousRangeBtn"
+                class="btn btn-outline-primary"
+                disabled
+            >
+                <i class="bi bi-chevron-left"></i>
+                Previous
+            </button>
+
+            <div class="current-range-display">
+
+                <span>
+                    Current Range
+                </span>
+
+                <strong id="currentRangeText">
+                    1–10
+                </strong>
+
+            </div>
+
+            <button
+                type="button"
+                id="nextRangeBtn"
+                class="btn btn-outline-primary"
+                disabled
+            >
+                Next
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+        </div>
+
+
+        <!-- ========================================================
+             PAGINATION
+             ======================================================== -->
+        <div class="pagination-toolbar">
+
+            <label for="pageSize">
+                Articles per page
+            </label>
+
+            <select id="pageSize" class="form-select form-select-sm">
+
+                <option value="10">10</option>
+                <option value="20" selected>20</option>
+                <option value="30">30</option>
+                <option value="50">50</option>
+
+            </select>
+
+            <div id="paginationControls" class="pagination-controls"></div>
+
+        </div>
+
+
+        <!-- ========================================================
+             ARTICLE GRID
+             ======================================================== -->
+        <div
+            id="articleResults"
+            class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 article-results"
+        >
+
+            <div class="col-12">
+
+                <div class="empty-state">
+
+                    <div class="empty-state-icon">
+                        <i class="bi bi-collection"></i>
+                    </div>
+
+                    <h3>
+                        Ready to Explore
+                    </h3>
+
+                    <p>
+                        Enter a Medium profile and load the archive.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         COMPARISON PANEL
+         ============================================================ -->
+    <section
+        id="comparisonSection"
+        class="comparison-section"
+        hidden
+    >
+
+        <div class="section-heading compact">
+
+            <span class="section-kicker">
+                ARTICLE COMPARISON
+            </span>
+
+            <h2>
+                <i class="bi bi-layout-split"></i>
+                Compare Articles
+            </h2>
+
+            <p>
+                Select two or three articles from the cards.
+            </p>
+
+        </div>
+
+        <div id="comparisonContent"></div>
+
+    </section>
+
+
+    <!-- ============================================================
+         INFORMATION
+         ============================================================ -->
+    <section class="information-section">
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="bi bi-diagram-3"></i>
+            </div>
+
+            <h3>
+                How It Works
+            </h3>
+
+            <p>
+                The application first creates a chronological archive.
+                The oldest article becomes #1 and the newest becomes #N.
+                Search, filtering and sorting are performed afterwards.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="bi bi-list-ol"></i>
+            </div>
+
+            <h3>
+                Permanent Numbering
+            </h3>
+
+            <p>
+                Article numbers represent their position in the
+                chronological archive. Filtering or sorting never
+                renumbers an article.
+            </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+            <div class="info-icon">
+                <i class="bi bi-database"></i>
+            </div>
+
+            <h3>
+                Archive Data
+            </h3>
+
+            <p>
+                A complete articles.json archive is the most reliable
+                source for historical numbering. RSS is only a fallback
+                and may not expose an author's complete history.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="app-footer">
+
+        <div>
+            <strong>
+                Medium Article Range Explorer
+            </strong>
+
+            <span>
+                Chronological archive discovery dashboard
+            </span>
+        </div>
+
+        <a href="../index.html">
+            <i class="bi bi-arrow-left"></i>
+            Back to Article Search
+        </a>
+
+    </footer>
+
+</div>
+
+
+<!-- ================================================================
+     BOOTSTRAP JAVASCRIPT
+     ================================================================ -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+<!-- ================================================================
+     APPLICATION JAVASCRIPT
+     ================================================================ -->
+<script src="js/article-range.js"></script>
+
+</body>
+</html>

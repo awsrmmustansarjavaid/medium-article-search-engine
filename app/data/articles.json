@@ -1,0 +1,96 @@
+{
+    "profile": "",
+    "username": "",
+    "description": "Chronological Medium article archive. Article #1 represents the oldest available article.",
+    "lastUpdated": "",
+    "totalArticles": 0,
+
+    "archiveRules": {
+        "numbering": "oldest-to-newest",
+        "permanentNumbers": true,
+        "sourcePriority": "local-archive",
+        "rssFallback": true
+    },
+
+    "statistics": {
+        "yearsActive": 0,
+        "topicCount": 0,
+        "mostActiveYear": null
+    },
+
+    "articles": [
+
+        /*
+         * ==========================================================
+         * ARTICLE DATA FORMAT
+         * ==========================================================
+         *
+         * The application accepts the following fields.
+         *
+         * title:
+         *     Article title.
+         *
+         * link:
+         *     Public Medium article URL.
+         *
+         * pubDate:
+         *     Publication date/time.
+         *
+         * description:
+         *     Article excerpt/content used for searching.
+         *
+         * image:
+         *     Article's own cover/featured image URL.
+         *
+         * topics:
+         *     Array of topics/tags.
+         *
+         * readingTime:
+         *     Reading time in minutes.
+         *
+         * views:
+         *     View count, when available.
+         *
+         * reads:
+         *     Read count, when available.
+         *
+         * comments:
+         *     Comment count, when available.
+         *
+         * claps:
+         *     Clap/recommendation count, when available.
+         *
+         * ==========================================================
+         *
+         * IMPORTANT:
+         *
+         * JSON itself does NOT support comments.
+         *
+         * The following object is therefore a FORMAT EXAMPLE ONLY
+         * and must be replaced by real article records before using
+         * the file as strict JSON.
+         *
+         * Example:
+         *
+         * {
+         *     "title": "Example Article",
+         *     "link": "https://medium.com/@username/example",
+         *     "pubDate": "2024-01-15T10:00:00Z",
+         *     "description": "Example article description.",
+         *     "image": "https://example.com/cover.jpg",
+         *     "topics": [
+         *         "AWS",
+         *         "DevOps"
+         *     ],
+         *     "readingTime": 6,
+         *     "views": null,
+         *     "reads": null,
+         *     "comments": null,
+         *     "claps": null
+         * }
+         *
+         * ==========================================================
+         */
+
+    ]
+}

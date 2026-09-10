@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +11,7 @@
          ========================================================= -->
     <title>Charlie MJ Medium Profile Article Search Engine</title>
 
-    <!-- Bootstrap 5 CDN for responsive frontend components -->
+    <!-- Bootstrap 5 CDN -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
@@ -25,43 +27,67 @@
          CUSTOM CSS
          ========================================================= -->
     <style>
+
         /*
         =========================================================
         CHARLIE MJ MEDIUM ARTICLE SEARCH ENGINE
-        CUSTOM FRONTEND STYLES
         =========================================================
 
-        The visual design intentionally avoids displaying large
-        article descriptions. Search results contain:
+        Main page features:
 
-            - Cover image
-            - Article title
-            - Publication date
-            - Open Article button
-
-        This keeps the page clean when many articles are found.
+        - Medium profile search
+        - Article search
+        - Multiple keyword chips
+        - Search highlighting
+        - Keyword highlighting
+        - Article cover images
+        - Newest / oldest / title sorting
+        - Grid / list view
+        - Dark mode
+        - Remembered profile URL
+        - Article Range Explorer navigation
+        =========================================================
         */
 
         :root {
+
             --page-bg: #f4f7fb;
             --card-bg: rgba(255, 255, 255, 0.92);
+
             --text-main: #172033;
             --text-muted: #6b7280;
+
             --border: rgba(15, 23, 42, 0.08);
+
             --accent: #7c3aed;
             --accent-dark: #5b21b6;
+
             --search-highlight: #ffe066;
             --keyword-highlight: #b8f2d0;
         }
+
+
+        /* ======================================================
+           GLOBAL BOX SIZING
+           ====================================================== */
 
         * {
             box-sizing: border-box;
         }
 
+
+        /* ======================================================
+           BODY
+           ====================================================== */
+
         body {
+
             min-height: 100vh;
+
             margin: 0;
+
             color: var(--text-main);
+
             font-family:
                 Inter,
                 system-ui,
@@ -71,9 +97,10 @@
                 sans-serif;
 
             /*
-                Modern layered background.
-                No external background image is required.
+            Modern layered background.
+            No external background image required.
             */
+
             background:
                 radial-gradient(
                     circle at 10% 10%,
@@ -92,16 +119,30 @@
                 ),
                 var(--page-bg);
 
-            transition: background 0.3s ease, color 0.3s ease;
+            transition:
+                background 0.3s ease,
+                color 0.3s ease;
         }
 
+
+        /* ======================================================
+           DARK MODE
+           ====================================================== */
+
         body.dark-mode {
+
             --page-bg: #0b1020;
+
             --card-bg: rgba(18, 25, 43, 0.94);
+
             --text-main: #f3f4f6;
+
             --text-muted: #a7b0c0;
+
             --border: rgba(255, 255, 255, 0.09);
+
             --search-highlight: #66520a;
+
             --keyword-highlight: #124d35;
 
             background:
@@ -118,390 +159,1409 @@
                 #0b1020;
         }
 
+
+        /* ======================================================
+           MAIN PAGE SHELL
+           ====================================================== */
+
         .page-shell {
+
             max-width: 1250px;
+
             margin: auto;
-            padding: 28px 18px 60px;
+
+            padding:
+                28px
+                18px
+                70px;
         }
+
 
         /* ======================================================
            BRAND / TEXT LOGO
            ====================================================== */
 
         .brand-area {
+
             text-align: center;
-            padding: 20px 10px 14px;
+
+            padding:
+                20px
+                10px
+                14px;
         }
 
+
         .brand-logo {
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 10px;
+
             margin: 0;
-            font-size: clamp(25px, 4vw, 42px);
+
+            font-size:
+                clamp(
+                    25px,
+                    4vw,
+                    42px
+                );
+
             font-weight: 900;
+
             letter-spacing: -1.5px;
         }
 
+
         .brand-icon {
+
             width: 45px;
             height: 45px;
+
             display: inline-flex;
+
             align-items: center;
             justify-content: center;
+
             border-radius: 13px;
+
             color: white;
-            background: linear-gradient(135deg, #111827, #7c3aed);
-            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.25);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 10px 30px
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.25
+                );
         }
 
+
         .brand-subtitle {
-            margin: 8px 0 0;
+
+            margin:
+                8px
+                0
+                0;
+
             color: var(--text-muted);
+
             font-size: 14px;
         }
+
 
         /* ======================================================
            GITHUB PROFILE
            ====================================================== */
 
         .github-profile {
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             gap: 12px;
-            margin: 8px 0 25px;
+
+            margin:
+                8px
+                0
+                25px;
         }
 
+
         .github-avatar {
+
             width: 52px;
             height: 52px;
+
             border-radius: 50%;
+
             border: 3px solid white;
-            box-shadow: 0 7px 22px rgba(0, 0, 0, 0.18);
+
+            box-shadow:
+                0 7px 22px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.18
+                );
+
             object-fit: cover;
         }
 
+
         .github-name {
+
             font-weight: 800;
+
             color: var(--text-main);
         }
 
+
         .github-link {
+
             color: var(--text-muted);
+
             text-decoration: none;
+
             font-size: 13px;
         }
 
+
         .github-link:hover {
+
             text-decoration: underline;
         }
+
 
         /* ======================================================
            SEARCH PANEL
            ====================================================== */
 
         .search-panel {
+
             background: var(--card-bg);
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
             border-radius: 24px;
+
             padding: 24px;
-            box-shadow: 0 18px 55px rgba(15, 23, 42, 0.09);
+
+            box-shadow:
+                0 18px 55px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.09
+                );
+
             backdrop-filter: blur(16px);
+
             margin-bottom: 22px;
         }
 
+
         .form-label {
+
             color: var(--text-main);
+
             font-weight: 800;
+
             font-size: 13px;
         }
 
+
         .form-control {
+
             min-height: 48px;
+
             border-radius: 12px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.78);
+
+            border:
+                1px solid
+                var(--border);
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.78
+                );
+
             color: #111827;
         }
 
+
         body.dark-mode .form-control {
-            background: rgba(255, 255, 255, 0.06);
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
             color: #f3f4f6;
         }
 
+
         .form-control:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+
+            border-color:
+                var(--accent);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.12
+                );
         }
 
+
         .search-button {
+
             min-height: 48px;
+
             border-radius: 12px;
+
             font-weight: 800;
-            background: linear-gradient(135deg, #111827, #7c3aed);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #7c3aed
+                );
+
             border: none;
         }
 
+
         .search-button:hover {
-            transform: translateY(-1px);
+
+            transform:
+                translateY(-1px);
         }
 
+
         .add-keyword-button {
+
             border-radius: 10px;
+
             font-weight: 700;
         }
+
 
         /* ======================================================
            KEYWORD CHIPS
            ====================================================== */
 
         .keyword-list {
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 7px;
+
             margin-top: 10px;
         }
 
+
         .keyword-chip {
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 7px;
-            padding: 6px 10px;
+
+            padding:
+                6px
+                10px;
+
             border-radius: 999px;
+
             background: #ecfdf5;
+
             color: #047857;
-            border: 1px solid #a7f3d0;
+
+            border:
+                1px solid
+                #a7f3d0;
+
             font-size: 13px;
+
             font-weight: 800;
         }
 
+
         .keyword-chip button {
+
             border: 0;
+
             background: transparent;
+
             color: inherit;
+
             padding: 0;
+
             line-height: 1;
         }
+
 
         /* ======================================================
            RESULT TOOLBAR
            ====================================================== */
 
         .results-toolbar {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
+
             gap: 12px;
+
             flex-wrap: wrap;
-            margin: 24px 0 15px;
+
+            margin:
+                24px
+                0
+                15px;
         }
 
+
         .results-title {
+
             font-size: 22px;
+
             font-weight: 900;
+
             margin: 0;
         }
 
+
         .result-count {
+
             color: var(--text-muted);
+
             font-size: 13px;
         }
 
+
         .toolbar-select {
+
             width: auto;
+
             min-width: 155px;
+
             min-height: 40px;
+
             border-radius: 10px;
         }
+
 
         /* ======================================================
            ARTICLE CARDS
            ====================================================== */
 
         .article-card {
+
             height: 100%;
+
             overflow: hidden;
-            border: 1px solid var(--border);
+
+            border:
+                1px solid
+                var(--border);
+
             border-radius: 18px;
-            background: var(--card-bg);
-            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.07);
+
+            background:
+                var(--card-bg);
+
+            box-shadow:
+                0 10px 35px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.07
+                );
+
             transition:
                 transform 0.2s ease,
                 box-shadow 0.2s ease;
         }
 
+
         .article-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 42px rgba(15, 23, 42, 0.13);
+
+            transform:
+                translateY(-5px);
+
+            box-shadow:
+                0 18px 42px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.13
+                );
         }
 
+
+        /* ======================================================
+           ARTICLE COVER
+           ====================================================== */
+
         .cover-wrapper {
+
             position: relative;
+
             height: 190px;
+
             overflow: hidden;
+
             background: #e5e7eb;
         }
 
+
         .cover-image {
+
             width: 100%;
+
             height: 100%;
+
             object-fit: cover;
+
             display: block;
-            transition: transform 0.35s ease;
+
+            transition:
+                transform 0.35s ease;
         }
+
 
         .article-card:hover .cover-image {
-            transform: scale(1.035);
+
+            transform:
+                scale(1.035);
         }
 
+
         .cover-placeholder {
+
             width: 100%;
+
             height: 100%;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
             background:
-                linear-gradient(135deg, #111827, #7c3aed);
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #7c3aed
+                );
+
             color: white;
+
             font-size: 42px;
         }
 
+
         .article-body {
+
             padding: 16px;
         }
 
+
         .article-title {
-            margin: 0 0 9px;
+
+            margin:
+                0
+                0
+                9px;
+
             font-size: 17px;
+
             line-height: 1.38;
+
             font-weight: 900;
         }
 
+
         .article-title a {
-            color: var(--text-main);
+
+            color:
+                var(--text-main);
+
             text-decoration: none;
         }
 
+
         .article-title a:hover {
+
             text-decoration: underline;
         }
 
+
         .article-date {
-            color: var(--text-muted);
+
+            color:
+                var(--text-muted);
+
             font-size: 12px;
+
             margin-bottom: 14px;
         }
 
+
         .read-button {
+
             width: 100%;
+
             border-radius: 10px;
+
             font-weight: 800;
         }
 
+
         /* ======================================================
-           HIGHLIGHTING
+           SEARCH HIGHLIGHTING
            ====================================================== */
 
-        /*
-            Yellow = main search text
-            Green = keyword
-        */
-
         mark.search-highlight {
-            background: var(--search-highlight);
+
+            background:
+                var(--search-highlight);
+
             color: inherit;
+
             font-weight: 900;
-            padding: 1px 3px;
+
+            padding:
+                1px
+                3px;
+
             border-radius: 4px;
         }
+
 
         mark.keyword-highlight {
-            background: var(--keyword-highlight);
+
+            background:
+                var(--keyword-highlight);
+
             color: inherit;
+
             font-weight: 900;
-            padding: 1px 3px;
+
+            padding:
+                1px
+                3px;
+
             border-radius: 4px;
         }
+
 
         /* ======================================================
            EMPTY / STATUS STATES
            ====================================================== */
 
         .empty-state {
+
             text-align: center;
-            padding: 55px 20px;
-            color: var(--text-muted);
-            background: var(--card-bg);
-            border: 1px dashed var(--border);
+
+            padding:
+                55px
+                20px;
+
+            color:
+                var(--text-muted);
+
+            background:
+                var(--card-bg);
+
+            border:
+                1px dashed
+                var(--border);
+
             border-radius: 18px;
         }
 
+
         .empty-icon {
+
             font-size: 42px;
+
             margin-bottom: 10px;
         }
 
+
         .status-box {
+
             display: none;
+
             margin-top: 14px;
+
             border-radius: 10px;
+
             font-size: 13px;
         }
+
+
+        /* ======================================================
+           ARTICLE RANGE EXPLORER
+           ======================================================
+
+           This section appears at the bottom of the main page.
+
+           It does NOT embed article-range.html.
+
+           Instead, it provides a polished entry point to the
+           dedicated Article Range Explorer page.
+
+           Both files are located inside /app/, therefore:
+
+               href="article-range.html"
+
+           is the correct relative path.
+           ====================================================== */
+
+        .article-range-section {
+
+            margin-top: 55px;
+        }
+
+
+        .article-range-card {
+
+            position: relative;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 24px;
+
+            overflow: hidden;
+
+            padding: 30px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,0.94),
+                    rgba(245,243,255,0.94)
+                );
+
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    15,
+                    23,
+                    42,
+                    0.10
+                );
+
+            backdrop-filter:
+                blur(18px);
+        }
+
+
+        /* Decorative glow */
+
+        .article-range-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+
+            height: 260px;
+
+            right: -100px;
+
+            top: -120px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.13
+                );
+
+            filter: blur(5px);
+
+            pointer-events: none;
+        }
+
+
+        body.dark-mode .article-range-card {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(18,25,43,0.96),
+                    rgba(30,25,55,0.96)
+                );
+        }
+
+
+        .article-range-icon {
+
+            position: relative;
+
+            flex: 0 0 72px;
+
+            width: 72px;
+
+            height: 72px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 20px;
+
+            color: white;
+
+            font-size: 32px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #7c3aed
+                );
+
+            box-shadow:
+                0 12px 30px
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.25
+                );
+        }
+
+
+        .article-range-content {
+
+            position: relative;
+
+            flex: 1;
+        }
+
+
+        .article-range-badge {
+
+            display: inline-block;
+
+            margin-bottom: 8px;
+
+            padding:
+                5px
+                10px;
+
+            border-radius: 999px;
+
+            background:
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.10
+                );
+
+            color:
+                var(--accent);
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            letter-spacing: 0.8px;
+        }
+
+
+        .article-range-content h2 {
+
+            margin:
+                0
+                0
+                10px;
+
+            color:
+                var(--text-main);
+
+            font-size:
+                clamp(
+                    23px,
+                    3vw,
+                    31px
+                );
+
+            font-weight: 900;
+
+            letter-spacing: -0.5px;
+        }
+
+
+        .article-range-content > p {
+
+            max-width: 850px;
+
+            margin:
+                0
+                0
+                18px;
+
+            color:
+                var(--text-muted);
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+
+        /* ======================================================
+           HOW IT WORKS BOX
+           ====================================================== */
+
+        .article-range-how-it-works {
+
+            margin:
+                0
+                0
+                20px;
+
+            padding:
+                17px
+                19px;
+
+            border-left:
+                4px solid
+                var(--accent);
+
+            border-radius:
+                0
+                14px
+                14px
+                0;
+
+            background:
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.055
+                );
+        }
+
+
+        .article-range-how-it-works h3 {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin:
+                0
+                0
+                7px;
+
+            color:
+                var(--text-main);
+
+            font-size: 16px;
+
+            font-weight: 900;
+        }
+
+
+        .article-range-how-it-works h3 i {
+
+            color:
+                var(--accent);
+        }
+
+
+        .article-range-how-it-works p {
+
+            margin: 0;
+
+            color:
+                var(--text-muted);
+
+            font-size: 13px;
+
+            line-height: 1.65;
+        }
+
+
+        /* ======================================================
+           ARTICLE NUMBER EXAMPLE
+           ====================================================== */
+
+        .article-range-example {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+            padding:
+                14px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 16px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.35
+                );
+        }
+
+
+        body.dark-mode .article-range-example {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.03
+                );
+        }
+
+
+        .range-example-item {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color:
+                var(--text-muted);
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .range-example-number {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 42px;
+
+            height: 32px;
+
+            padding:
+                0
+                9px;
+
+            border-radius: 9px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #7c3aed
+                );
+
+            font-size: 13px;
+
+            font-weight: 900;
+        }
+
+
+        .range-example-arrow {
+
+            color:
+                var(--accent);
+
+            font-size: 16px;
+        }
+
+
+        /* ======================================================
+           ARTICLE RANGE FEATURES
+           ====================================================== */
+
+        .article-range-features {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-bottom: 22px;
+        }
+
+
+        .article-range-features span {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            padding:
+                7px
+                10px;
+
+            border:
+                1px solid
+                var(--border);
+
+            border-radius: 999px;
+
+            color:
+                var(--text-muted);
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.42
+                );
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        body.dark-mode .article-range-features span {
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.035
+                );
+        }
+
+
+        .article-range-features i {
+
+            color:
+                var(--accent);
+        }
+
+
+        /* ======================================================
+           ARTICLE RANGE BUTTON
+           ====================================================== */
+
+        .article-range-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            min-height: 48px;
+
+            padding:
+                0
+                20px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #7c3aed
+                );
+
+            font-weight: 800;
+
+            box-shadow:
+                0 10px 25px
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.20
+                );
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .article-range-button:hover {
+
+            color: white;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 14px 30px
+                rgba(
+                    124,
+                    58,
+                    237,
+                    0.28
+                );
+        }
+
 
         /* ======================================================
            DARK MODE BUTTON
            ====================================================== */
 
         .theme-button {
+
             position: fixed;
+
             right: 20px;
+
             bottom: 20px;
+
             z-index: 1000;
+
             width: 48px;
+
             height: 48px;
+
             border: 0;
+
             border-radius: 50%;
+
             background: #111827;
+
             color: white;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+
+            box-shadow:
+                0 8px 25px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.2
+                );
         }
+
 
         /* ======================================================
            LIST VIEW
            ====================================================== */
 
         .article-grid.list-view .article-card {
+
             display: flex;
+
             flex-direction: row;
         }
 
+
         .article-grid.list-view .cover-wrapper {
+
             width: 240px;
+
             min-width: 240px;
+
             height: 170px;
         }
 
+
         .article-grid.list-view .article-body {
+
             flex: 1;
         }
 
+
+        /* ======================================================
+           RESPONSIVE
+           ====================================================== */
+
         @media (max-width: 700px) {
+
+            .page-shell {
+
+                padding:
+                    18px
+                    12px
+                    70px;
+            }
+
+
+            .brand-logo {
+
+                flex-direction: column;
+
+                gap: 8px;
+
+                letter-spacing: -0.8px;
+            }
+
+
+            .search-panel {
+
+                padding: 18px;
+
+                border-radius: 18px;
+            }
+
+
             .article-grid.list-view .article-card {
+
                 display: block;
             }
 
+
             .article-grid.list-view .cover-wrapper {
+
                 width: 100%;
+
                 height: 190px;
             }
+
+
+            .article-range-card {
+
+                flex-direction: column;
+
+                padding: 22px;
+
+                border-radius: 21px;
+            }
+
+
+            .article-range-icon {
+
+                flex-basis: 62px;
+
+                width: 62px;
+
+                height: 62px;
+
+                font-size: 27px;
+            }
+
+
+            .article-range-example {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .range-example-arrow {
+
+                transform:
+                    rotate(90deg);
+            }
+
+
+            .article-range-button {
+
+                width: 100%;
+
+                justify-content: center;
+            }
         }
+
+
+        @media (max-width: 450px) {
+
+            .github-profile {
+
+                margin-bottom: 20px;
+            }
+
+
+            .article-range-content h2 {
+
+                font-size: 22px;
+            }
+
+
+            .article-range-features {
+
+                display: grid;
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .article-range-features span {
+
+                width: 100%;
+            }
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
 <div class="page-shell">
+
 
     <!-- =========================================================
          BRAND / TEXT LOGO
@@ -510,11 +1570,13 @@
     <header class="brand-area">
 
         <h1 class="brand-logo">
+
             <span class="brand-icon">
                 <i class="bi bi-search"></i>
             </span>
 
             Charlie MJ Medium Profile Article Search Engine
+
         </h1>
 
         <p class="brand-subtitle">
@@ -526,11 +1588,7 @@
 
     <!-- =========================================================
          GITHUB PROFILE
-         =========================================================
-
-         The .png endpoint automatically displays the GitHub
-         account avatar associated with this username.
-    -->
+         ========================================================= -->
 
     <div class="github-profile">
 
@@ -542,6 +1600,7 @@
         >
 
         <div>
+
             <div class="github-name">
                 awsrmustansarjavaid
             </div>
@@ -555,6 +1614,7 @@
                 <i class="bi bi-github"></i>
                 GitHub Profile
             </a>
+
         </div>
 
     </div>
@@ -568,7 +1628,9 @@
 
         <div class="row g-3">
 
+
             <!-- Medium profile -->
+
             <div class="col-12">
 
                 <label
@@ -590,6 +1652,7 @@
 
 
             <!-- Main search -->
+
             <div class="col-lg-6">
 
                 <label
@@ -608,14 +1671,17 @@
                 >
 
                 <div class="form-text">
+
                     Main search terms are highlighted in
                     <strong>yellow</strong>.
+
                 </div>
 
             </div>
 
 
             <!-- Keyword input -->
+
             <div class="col-lg-6">
 
                 <label
@@ -647,11 +1713,14 @@
                 </div>
 
                 <div class="form-text">
+
                     Keyword matches are highlighted in
                     <strong>green</strong>.
+
                 </div>
 
                 <!-- Dynamically generated keyword chips -->
+
                 <div
                     id="keywordList"
                     class="keyword-list"
@@ -661,6 +1730,7 @@
 
 
             <!-- Search controls -->
+
             <div class="col-12">
 
                 <div class="d-flex flex-wrap gap-2">
@@ -673,6 +1743,7 @@
                         <i class="bi bi-search"></i>
                         Search Medium
                     </button>
+
 
                     <button
                         id="clearBtn"
@@ -691,6 +1762,7 @@
 
 
         <!-- Status -->
+
         <div
             id="statusBox"
             class="alert alert-secondary status-box"
@@ -707,6 +1779,7 @@
     <div class="results-toolbar">
 
         <div>
+
             <h2 class="results-title">
                 Articles
             </h2>
@@ -717,17 +1790,20 @@
             >
                 No search performed
             </div>
+
         </div>
 
 
         <div class="d-flex gap-2">
 
             <!-- Sort -->
+
             <select
                 id="sortSelect"
                 class="form-select toolbar-select"
                 aria-label="Sort articles"
             >
+
                 <option value="newest">
                     Newest first
                 </option>
@@ -739,10 +1815,12 @@
                 <option value="title">
                     Title A–Z
                 </option>
+
             </select>
 
 
             <!-- Grid/List -->
+
             <button
                 id="viewToggle"
                 class="btn btn-outline-secondary"
@@ -788,6 +1866,259 @@
 
     </main>
 
+
+    <!-- =========================================================
+         ARTICLE RANGE EXPLORER SECTION
+         =========================================================
+
+         This is the connection between the main search page
+         and the dedicated Article Range Explorer.
+
+         IMPORTANT:
+
+         We intentionally use a normal link rather than
+         embedding article-range.html.
+
+         Both files are inside:
+
+             app/
+             ├── index.html
+             └── article-range.html
+
+         Therefore:
+
+             href="article-range.html"
+
+         is the correct relative path.
+
+         The dedicated page can contain its own complete
+         HTML/CSS/JavaScript without conflicting with this page.
+         ========================================================= -->
+
+    <section
+        class="article-range-section"
+        aria-labelledby="articleRangeHeading"
+    >
+
+        <div class="article-range-card">
+
+
+            <!-- Section icon -->
+
+            <div class="article-range-icon">
+
+                <i class="bi bi-sort-numeric-down"></i>
+
+            </div>
+
+
+            <!-- Section content -->
+
+            <div class="article-range-content">
+
+
+                <!-- Section badge -->
+
+                <span class="article-range-badge">
+                    ARTICLE RANGE EXPLORER
+                </span>
+
+
+                <!-- Section heading -->
+
+                <h2 id="articleRangeHeading">
+                    Explore Articles by Chronological Range
+                </h2>
+
+
+                <p>
+
+                    Browse the complete Medium article archive using
+                    permanent chronological article numbers. The oldest
+                    article becomes <strong>#1</strong> and the newest
+                    article becomes <strong>#N</strong>.
+
+                </p>
+
+
+                <!-- =================================================
+                     HOW IT WORKS
+                     ================================================= -->
+
+                <div class="article-range-how-it-works">
+
+                    <h3>
+
+                        <i class="bi bi-lightbulb"></i>
+
+                        How It Works
+
+                    </h3>
+
+                    <p>
+
+                        The application first creates a chronological
+                        archive. The oldest article becomes
+                        <strong>#1</strong> and the newest becomes
+                        <strong>#N</strong>. Search, filtering and sorting
+                        are performed afterwards.
+
+                    </p>
+
+                </div>
+
+
+                <!-- =================================================
+                     ARTICLE NUMBER EXAMPLE
+                     ================================================= -->
+
+                <div class="article-range-example">
+
+
+                    <div class="range-example-item">
+
+                        <span class="range-example-number">
+                            #1
+                        </span>
+
+                        <span>
+                            Oldest article
+                        </span>
+
+                    </div>
+
+
+                    <div class="range-example-arrow">
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </div>
+
+
+                    <div class="range-example-item">
+
+                        <span class="range-example-number">
+                            #2
+                        </span>
+
+                        <span>
+                            Next article
+                        </span>
+
+                    </div>
+
+
+                    <div class="range-example-arrow">
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </div>
+
+
+                    <div class="range-example-item">
+
+                        <span class="range-example-number">
+                            #N
+                        </span>
+
+                        <span>
+                            Newest article
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     AVAILABLE FEATURES
+                     ================================================= -->
+
+                <div class="article-range-features">
+
+
+                    <span>
+
+                        <i class="bi bi-clock-history"></i>
+
+                        Oldest → Newest
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-stars"></i>
+
+                        Recent Published
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-search"></i>
+
+                        Advanced Search
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-calendar3"></i>
+
+                        Date & Month Filters
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-bookmark"></i>
+
+                        Favorites
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="bi bi-layout-text-window"></i>
+
+                        Grid / List View
+
+                    </span>
+
+                </div>
+
+
+                <!-- =================================================
+                     OPEN ARTICLE RANGE PAGE
+                     ================================================= -->
+
+                <div class="article-range-action">
+
+                    <a
+                        href="app/article-range.html"
+                        class="btn article-range-button"
+                    >
+
+                        <i class="bi bi-arrow-right-circle"></i>
+
+                        Open Article Range Explorer
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
 </div>
 
 
@@ -802,17 +2133,23 @@
     title="Toggle dark mode"
     aria-label="Toggle dark mode"
 >
+
     <i class="bi bi-moon-stars"></i>
+
 </button>
 
 
-<!-- Bootstrap JavaScript -->
+<!-- =========================================================
+     BOOTSTRAP JAVASCRIPT
+     ========================================================= -->
+
 <script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
 
 
 <script>
+
 /*
 ================================================================
 CHARLIE MJ MEDIUM PROFILE ARTICLE SEARCH ENGINE
@@ -820,7 +2157,7 @@ JAVASCRIPT
 ================================================================
 
 MAIN FEATURES
---------------
+
 1. Medium profile URL
 2. Main article search
 3. Multiple keyword chips
@@ -832,21 +2169,25 @@ MAIN FEATURES
 9. Grid/list view
 10. Dark mode
 11. Remember profile URL
-12. Clean responsive Bootstrap frontend
+12. Article Range Explorer navigation
 
 IMPORTANT TECHNICAL NOTE
-------------------------
+
 A local browser-only HTML file cannot directly and reliably
 scrape an unlimited Medium archive because of browser CORS
 restrictions and Medium's changing page structure.
 
 This version uses Medium's RSS feed through rss2json.com.
 
-That means the number of searchable historical articles depends
+Therefore the number of searchable historical articles depends
 on what the Medium RSS feed exposes.
 
-The interface is intentionally designed so that a future local
-backend/archive index can be plugged into the same frontend.
+The dedicated Article Range Explorer is designed separately so
+that a complete local archive such as:
+
+    data/articles.json
+
+can be used for permanent chronological numbering.
 ================================================================
 */
 
@@ -911,10 +2252,14 @@ const themeBtn =
    ============================================================= */
 
 const savedProfileUrl =
-    localStorage.getItem("charlieMediumProfileUrl");
+    localStorage.getItem(
+        "charlieMediumProfileUrl"
+    );
 
 if (savedProfileUrl) {
-    profileUrlInput.value = savedProfileUrl;
+
+    profileUrlInput.value =
+        savedProfileUrl;
 }
 
 
@@ -955,21 +2300,32 @@ function buildFeedUrl(profileUrl) {
     let cleanUrl =
         profileUrl.trim();
 
+
     if (!cleanUrl) {
+
         throw new Error(
             "Please enter your Medium profile URL."
         );
     }
 
+
     if (!/^https?:\/\//i.test(cleanUrl)) {
-        cleanUrl = "https://" + cleanUrl;
+
+        cleanUrl =
+            "https://" +
+            cleanUrl;
     }
+
 
     let url;
 
     try {
-        url = new URL(cleanUrl);
+
+        url =
+            new URL(cleanUrl);
+
     } catch {
+
         throw new Error(
             "The Medium profile URL is not valid."
         );
@@ -977,8 +2333,9 @@ function buildFeedUrl(profileUrl) {
 
 
     /*
-        Standard Medium profile:
-            https://medium.com/@username
+    Standard Medium profile:
+
+        https://medium.com/@username
     */
 
     if (url.hostname === "medium.com") {
@@ -988,27 +2345,35 @@ function buildFeedUrl(profileUrl) {
                 .split("/")
                 .filter(Boolean);
 
+
         if (
             parts.length === 0 ||
             !parts[0].startsWith("@")
         ) {
+
             throw new Error(
                 "Use a profile URL such as https://medium.com/@username"
             );
         }
 
-        return "https://medium.com/feed/" + parts[0];
+
+        return (
+            "https://medium.com/feed/" +
+            parts[0]
+        );
     }
 
 
     /*
-        Medium custom publication/profile domain:
-            https://username.medium.com
+    Medium custom profile domain:
+
+        https://username.medium.com
     */
 
     if (
         url.hostname.endsWith(".medium.com")
     ) {
+
         return (
             "https://" +
             url.hostname +
@@ -1032,25 +2397,33 @@ function addKeyword() {
     const value =
         keywordInput.value.trim();
 
+
     if (!value) {
         return;
     }
 
+
     const normalized =
         normalize(value);
 
+
     /*
-        Prevent duplicate keywords.
+    Prevent duplicate keywords.
     */
+
     if (
         keywords.some(
             keyword =>
-                normalize(keyword) === normalized
+                normalize(keyword) ===
+                normalized
         )
     ) {
+
         keywordInput.value = "";
+
         return;
     }
+
 
     keywords.push(value);
 
@@ -1066,14 +2439,22 @@ function addKeyword() {
 
 function removeKeyword(index) {
 
-    keywords.splice(index, 1);
+    keywords.splice(
+        index,
+        1
+    );
+
 
     renderKeywordChips();
 
+
     /*
-        If articles are already loaded, immediately re-filter.
+    If articles are already loaded,
+    immediately re-filter.
     */
+
     if (allArticles.length > 0) {
+
         applyFiltersAndRender();
     }
 }
@@ -1092,28 +2473,34 @@ function renderKeywordChips() {
         return;
     }
 
+
     keywordList.innerHTML =
-        keywords.map(
-            (keyword, index) => `
+        keywords
+            .map(
+                (keyword, index) => `
 
-                <span class="keyword-chip">
+                    <span class="keyword-chip">
 
-                    <i class="bi bi-tag-fill"></i>
+                        <i class="bi bi-tag-fill"></i>
 
-                    ${escapeHtml(keyword)}
+                        ${escapeHtml(keyword)}
 
-                    <button
-                        type="button"
-                        title="Remove keyword"
-                        aria-label="Remove keyword"
-                        onclick="removeKeyword(${index})"
-                    >
-                        <i class="bi bi-x-lg"></i>
-                    </button>
+                        <button
+                            type="button"
+                            title="Remove keyword"
+                            aria-label="Remove keyword"
+                            onclick="removeKeyword(${index})"
+                        >
 
-                </span>
-            `
-        ).join("");
+                            <i class="bi bi-x-lg"></i>
+
+                        </button>
+
+                    </span>
+
+                `
+            )
+            .join("");
 }
 
 
@@ -1126,16 +2513,18 @@ function stripHtml(html) {
     const element =
         document.createElement("div");
 
+
     element.innerHTML =
         html || "";
+
 
     return (
         element.textContent ||
         element.innerText ||
         ""
     )
-    .replace(/\s+/g, " ")
-    .trim();
+        .replace(/\s+/g, " ")
+        .trim();
 }
 
 
@@ -1146,11 +2535,13 @@ function stripHtml(html) {
 function searchableArticleText(article) {
 
     return normalize(
+
         [
             article.title,
             article.description,
             article.content
         ].join(" ")
+
     );
 }
 
@@ -1168,37 +2559,45 @@ function articleMatches(
     const text =
         searchableArticleText(article);
 
+
     /*
-        Main search:
-        If empty, don't restrict by it.
+    Main search.
+
+    If empty, don't restrict by it.
     */
+
     if (
         mainSearch &&
-        !text.includes(normalize(mainSearch))
+        !text.includes(
+            normalize(mainSearch)
+        )
     ) {
+
         return false;
     }
 
 
     /*
-        Multiple keywords:
-        All keyword filters must match.
+    Multiple keywords.
 
-        Example:
-            Turkish
-            grammar
-            negative
-
-        An article must contain all three.
+    All selected keyword filters must match.
     */
-    for (const keyword of selectedKeywords) {
+
+    for (
+        const keyword
+        of selectedKeywords
+    ) {
 
         if (
-            !text.includes(normalize(keyword))
+            !text.includes(
+                normalize(keyword)
+            )
         ) {
+
             return false;
         }
     }
+
 
     return true;
 }
@@ -1217,54 +2616,78 @@ function highlightText(
     let safeText =
         escapeHtml(text);
 
-    /*
-        Build terms from the main search and all keywords.
-        Longest terms are processed first so that larger phrases
-        are highlighted correctly.
-    */
 
     const terms = [];
 
+
     if (mainSearch.trim()) {
+
         terms.push({
-            value: mainSearch.trim(),
-            className: "search-highlight"
+
+            value:
+                mainSearch.trim(),
+
+            className:
+                "search-highlight"
+
         });
     }
 
-    selectedKeywords.forEach(keyword => {
-        if (keyword.trim()) {
-            terms.push({
-                value: keyword.trim(),
-                className: "keyword-highlight"
-            });
+
+    selectedKeywords.forEach(
+        keyword => {
+
+            if (keyword.trim()) {
+
+                terms.push({
+
+                    value:
+                        keyword.trim(),
+
+                    className:
+                        "keyword-highlight"
+
+                });
+            }
         }
-    });
+    );
 
 
     /*
-        Remove duplicate terms.
+    Remove duplicate terms.
     */
+
     const uniqueTerms = [];
 
-    for (const item of terms) {
+
+    for (
+        const item
+        of terms
+    ) {
 
         const exists =
             uniqueTerms.some(
                 existing =>
-                    normalize(existing.value) ===
-                    normalize(item.value)
+                    normalize(
+                        existing.value
+                    ) ===
+                    normalize(
+                        item.value
+                    )
             );
 
+
         if (!exists) {
+
             uniqueTerms.push(item);
         }
     }
 
 
     /*
-        Highlight longer phrases first.
+    Process longer phrases first.
     */
+
     uniqueTerms.sort(
         (a, b) =>
             b.value.length -
@@ -1273,66 +2696,77 @@ function highlightText(
 
 
     /*
-        We temporarily protect already-created marks
-        to prevent overlapping replacements.
+    Protect generated marks with placeholders.
     */
+
     const placeholders = [];
 
 
-    uniqueTerms.forEach((item, index) => {
+    uniqueTerms.forEach(
+        (item, index) => {
 
-        const placeholder =
-            `___HIGHLIGHT_${index}_${placeholders.length}___`;
-
-        /*
-            Escape special regex characters.
-        */
-        const escapedTerm =
-            item.value.replace(
-                /[.*+?^${}()|[\]\\]/g,
-                "\\$&"
-            );
-
-        const regex =
-            new RegExp(
-                escapedTerm,
-                "gi"
-            );
-
-        if (regex.test(safeText)) {
-
-            safeText =
-                safeText.replace(
-                    regex,
-                    match => {
-
-                        const token =
-                            `@@@${placeholders.length}@@@`;
-
-                        placeholders.push({
-                            token,
-                            html:
-                                `<mark class="${item.className}">${match}</mark>`
-                        });
-
-                        return token;
-                    }
+            const escapedTerm =
+                item.value.replace(
+                    /[.*+?^${}()|[\]\\]/g,
+                    "\\$&"
                 );
+
+
+            const regex =
+                new RegExp(
+                    escapedTerm,
+                    "gi"
+                );
+
+
+            if (
+                regex.test(
+                    safeText
+                )
+            ) {
+
+                safeText =
+                    safeText.replace(
+                        regex,
+                        match => {
+
+                            const token =
+                                `@@@${placeholders.length}@@@`;
+
+
+                            placeholders.push({
+
+                                token,
+
+                                html:
+                                    `<mark class="${item.className}">${match}</mark>`
+
+                            });
+
+
+                            return token;
+                        }
+                    );
+            }
         }
-    });
+    );
 
 
     /*
-        Restore placeholders.
+    Restore placeholders.
     */
-    placeholders.forEach(item => {
 
-        safeText =
-            safeText.replaceAll(
-                item.token,
-                item.html
-            );
-    });
+    placeholders.forEach(
+        item => {
+
+            safeText =
+                safeText.replaceAll(
+                    item.token,
+                    item.html
+                );
+        }
+    );
+
 
     return safeText;
 }
@@ -1345,19 +2779,24 @@ function highlightText(
 function formatDate(dateValue) {
 
     if (!dateValue) {
+
         return "Date unavailable";
     }
 
+
     const date =
         new Date(dateValue);
+
 
     if (
         Number.isNaN(
             date.getTime()
         )
     ) {
+
         return "Date unavailable";
     }
+
 
     return date.toLocaleDateString(
         undefined,
@@ -1371,109 +2810,183 @@ function formatDate(dateValue) {
 
 
 /* =============================================================
-   FALLBACK COVER
+   EXTRACT ARTICLE IMAGE FROM HTML
    ============================================================= */
 
 function extractImageFromHtml(html) {
-
-    /*
-        Medium's RSS feed (via rss2json) usually leaves the
-        "thumbnail" field empty. The real cover image is still
-        present, but embedded as an <img> tag inside the
-        article's HTML "content" / "description" field instead.
-
-        Medium also injects a hidden 1x1 tracking pixel as the
-        very first <img> in that HTML, so we skip any image
-        that is obviously just a tracking pixel and return the
-        first real-looking image we find.
-    */
 
     if (!html) {
         return "";
     }
 
-    const imgTagPattern = /<img[^>]*>/gi;
-    const srcPattern = /src=["']([^"']+)["']/i;
-    const widthPattern = /width=["']?(\d+)["']?/i;
-    const heightPattern = /height=["']?(\d+)["']?/i;
+
+    /*
+    Find image tags inside RSS HTML.
+    */
+
+    const imgTagPattern =
+        /<img[^>]*>/gi;
+
+
+    const srcPattern =
+        /src=["']([^"']+)["']/i;
+
+
+    const widthPattern =
+        /width=["']?(\d+)["']?/i;
+
+
+    const heightPattern =
+        /height=["']?(\d+)["']?/i;
+
 
     const imgTags =
-        html.match(imgTagPattern) || [];
+        html.match(
+            imgTagPattern
+        ) || [];
 
-    for (const tag of imgTags) {
+
+    for (
+        const tag
+        of imgTags
+    ) {
 
         const srcMatch =
-            tag.match(srcPattern);
+            tag.match(
+                srcPattern
+            );
+
 
         if (!srcMatch) {
             continue;
         }
 
-        const src = srcMatch[1];
+
+        const src =
+            srcMatch[1];
+
 
         const widthMatch =
-            tag.match(widthPattern);
+            tag.match(
+                widthPattern
+            );
+
 
         const heightMatch =
-            tag.match(heightPattern);
+            tag.match(
+                heightPattern
+            );
+
 
         const width =
-            widthMatch ? parseInt(widthMatch[1], 10) : null;
+            widthMatch
+                ? parseInt(
+                    widthMatch[1],
+                    10
+                )
+                : null;
+
 
         const height =
-            heightMatch ? parseInt(heightMatch[1], 10) : null;
+            heightMatch
+                ? parseInt(
+                    heightMatch[1],
+                    10
+                )
+                : null;
+
+
+        /*
+        Skip obvious tracking pixels.
+        */
 
         const isTrackingPixel =
-            (width !== null && width <= 2) ||
-            (height !== null && height <= 2) ||
-            src.includes("stat.medium.com") ||
-            src.includes("/stat?event=");
+
+            (
+                width !== null &&
+                width <= 2
+            ) ||
+
+            (
+                height !== null &&
+                height <= 2
+            ) ||
+
+            src.includes(
+                "stat.medium.com"
+            ) ||
+
+            src.includes(
+                "/stat?event="
+            );
+
 
         if (isTrackingPixel) {
             continue;
         }
 
+
         return src;
     }
+
 
     return "";
 }
 
 
+/* =============================================================
+   COVER MARKUP
+   ============================================================= */
+
 function coverMarkup(article) {
 
     /*
-        RSS services may expose an image through:
-            thumbnail
-            enclosure.link
-            media:content
-            an <img> tag inside content/description
+    Possible image sources:
 
-        Different feeds expose different fields, and Medium's
-        feed (through rss2json) generally only exposes the
-        cover picture inside the HTML content, not "thumbnail".
+    1. thumbnail
+    2. enclosure.link
+    3. content HTML
+    4. description HTML
+
+    The browser uses the first usable source.
     */
 
     const image =
+
         article.thumbnail ||
+
         (
             article.enclosure &&
             article.enclosure.link
         ) ||
-        extractImageFromHtml(article.content) ||
-        extractImageFromHtml(article.description) ||
+
+        extractImageFromHtml(
+            article.content
+        ) ||
+
+        extractImageFromHtml(
+            article.description
+        ) ||
+
         "";
+
 
     if (!image) {
 
         return `
+
             <div class="cover-placeholder">
+
                 <i class="bi bi-file-earmark-text"></i>
+
             </div>
+
         `;
     }
 
+
     return `
+
         <img
             class="cover-image"
             src="${escapeHtml(image)}"
@@ -1484,6 +2997,7 @@ function coverMarkup(article) {
                 '<div class=&quot;cover-placeholder&quot;><i class=&quot;bi bi-file-earmark-text&quot;></i></div>';
             "
         >
+
     `;
 }
 
@@ -1497,6 +3011,7 @@ function sortArticles(articleArray) {
     const sorted =
         [...articleArray];
 
+
     const sort =
         sortSelect.value;
 
@@ -1509,7 +3024,9 @@ function sortArticles(articleArray) {
                 new Date(a.pubDate)
         );
 
-    } else if (sort === "oldest") {
+    }
+
+    else if (sort === "oldest") {
 
         sorted.sort(
             (a, b) =>
@@ -1517,20 +3034,28 @@ function sortArticles(articleArray) {
                 new Date(b.pubDate)
         );
 
-    } else if (sort === "title") {
+    }
+
+    else if (sort === "title") {
 
         sorted.sort(
+
             (a, b) =>
+
                 String(a.title || "")
                     .localeCompare(
-                        String(b.title || ""),
+                        String(
+                            b.title || ""
+                        ),
                         undefined,
                         {
-                            sensitivity: "base"
+                            sensitivity:
+                                "base"
                         }
                     )
         );
     }
+
 
     return sorted;
 }
@@ -1545,10 +3070,15 @@ function renderArticles(articleArray) {
     const mainSearch =
         searchTextInput.value.trim();
 
+
     const sorted =
-        sortArticles(articleArray);
+        sortArticles(
+            articleArray
+        );
+
 
     resultCount.textContent =
+
         `${sorted.length} matching article${sorted.length === 1 ? "" : "s"}`;
 
 
@@ -1557,6 +3087,7 @@ function renderArticles(articleArray) {
         results.className =
             "row article-grid";
 
+
         results.innerHTML = `
 
             <div class="col-12">
@@ -1564,97 +3095,145 @@ function renderArticles(articleArray) {
                 <div class="empty-state">
 
                     <div class="empty-icon">
+
                         <i class="bi bi-search"></i>
+
                     </div>
 
+
                     <h3 class="h5 fw-bold">
+
                         No matching articles
+
                     </h3>
 
+
                     <p class="mb-0">
+
                         Try another search term or remove a keyword filter.
+
                     </p>
 
                 </div>
 
             </div>
+
         `;
+
 
         return;
     }
 
 
     results.innerHTML =
-        sorted.map(article => {
 
-            const title =
-                highlightText(
-                    article.title || "Untitled Article",
-                    mainSearch,
-                    keywords
-                );
+        sorted
+            .map(
+                article => {
 
-            const safeUrl =
-                escapeHtml(
-                    article.link || "#"
-                );
+                    const title =
+                        highlightText(
+                            article.title ||
+                            "Untitled Article",
 
-            return `
+                            mainSearch,
 
-                <div class="col">
+                            keywords
+                        );
 
-                    <article class="article-card">
 
-                        <div class="cover-wrapper">
-                            ${coverMarkup(article)}
+                    const safeUrl =
+                        escapeHtml(
+                            article.link ||
+                            "#"
+                        );
+
+
+                    return `
+
+                        <div class="col">
+
+                            <article class="article-card">
+
+
+                                <div class="cover-wrapper">
+
+                                    ${coverMarkup(article)}
+
+                                </div>
+
+
+                                <div class="article-body">
+
+
+                                    <h3 class="article-title">
+
+                                        <a
+                                            href="${safeUrl}"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+
+                                            ${title}
+
+                                        </a>
+
+                                    </h3>
+
+
+                                    <div class="article-date">
+
+                                        <i class="bi bi-calendar3"></i>
+
+                                        ${formatDate(
+                                            article.pubDate
+                                        )}
+
+                                    </div>
+
+
+                                    <a
+                                        href="${safeUrl}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="btn btn-dark read-button"
+                                    >
+
+                                        <i class="bi bi-box-arrow-up-right"></i>
+
+                                        Open Article
+
+                                    </a>
+
+                                </div>
+
+                            </article>
+
                         </div>
 
-                        <div class="article-body">
-
-                            <h3 class="article-title">
-
-                                <a
-                                    href="${safeUrl}"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    ${title}
-                                </a>
-
-                            </h3>
-
-                            <div class="article-date">
-                                <i class="bi bi-calendar3"></i>
-                                ${formatDate(article.pubDate)}
-                            </div>
-
-                            <a
-                                href="${safeUrl}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="btn btn-dark read-button"
-                            >
-                                <i class="bi bi-box-arrow-up-right"></i>
-                                Open Article
-                            </a>
-
-                        </div>
-
-                    </article>
-
-                </div>
-            `;
-
-        }).join("");
+                    `;
+                }
+            )
+            .join("");
 
 
     /*
-        Reapply the selected view after rendering.
+    Reapply selected view.
     */
-    if (currentView === "list") {
-        results.classList.add("list-view");
+
+    if (
+        currentView === "list"
+    ) {
+
+        results.classList.add(
+            "list-view"
+        );
+
     } else {
-        results.classList.remove("list-view");
+
+        results.classList.remove(
+            "list-view"
+        );
     }
 }
 
@@ -1670,6 +3249,7 @@ function applyFiltersAndRender() {
             searchTextInput.value
         );
 
+
     const filtered =
         allArticles.filter(
             article =>
@@ -1680,7 +3260,10 @@ function applyFiltersAndRender() {
                 )
         );
 
-    renderArticles(filtered);
+
+    renderArticles(
+        filtered
+    );
 }
 
 
@@ -1693,13 +3276,15 @@ async function searchMedium() {
     const profileUrl =
         profileUrlInput.value.trim();
 
+
     const mainSearch =
         searchTextInput.value.trim();
 
 
     /*
-        At least one search criterion is required.
+    At least one search criterion is required.
     */
+
     if (
         !mainSearch &&
         keywords.length === 0
@@ -1717,26 +3302,34 @@ async function searchMedium() {
     try {
 
         const feedUrl =
-            buildFeedUrl(profileUrl);
+            buildFeedUrl(
+                profileUrl
+            );
 
 
         /*
-            Save profile URL for the next visit.
+        Save profile URL.
         */
+
         localStorage.setItem(
             "charlieMediumProfileUrl",
             profileUrl
         );
 
 
-        searchBtn.disabled = true;
+        searchBtn.disabled =
+            true;
+
 
         searchBtn.innerHTML = `
+
             <span
                 class="spinner-border spinner-border-sm me-1"
                 aria-hidden="true"
             ></span>
+
             Searching...
+
         `;
 
 
@@ -1747,11 +3340,16 @@ async function searchMedium() {
 
 
         /*
-            rss2json is used as a browser-friendly bridge.
+        rss2json provides a browser-friendly RSS bridge.
         */
+
         const apiUrl =
+
             "https://api.rss2json.com/v1/api.json?rss_url=" +
-            encodeURIComponent(feedUrl);
+
+            encodeURIComponent(
+                feedUrl
+            );
 
 
         const response =
@@ -1788,8 +3386,13 @@ async function searchMedium() {
 
 
         allArticles =
-            Array.isArray(data.items)
+
+            Array.isArray(
+                data.items
+            )
+
                 ? data.items
+
                 : [];
 
 
@@ -1797,7 +3400,9 @@ async function searchMedium() {
 
 
         showStatus(
+
             `Search completed. ${allArticles.length} article(s) were retrieved from the Medium feed.`,
+
             "success"
         );
 
@@ -1806,6 +3411,7 @@ async function searchMedium() {
 
         allArticles = [];
 
+
         results.innerHTML = `
 
             <div class="col-12">
@@ -1813,24 +3419,37 @@ async function searchMedium() {
                 <div class="empty-state">
 
                     <div class="empty-icon">
+
                         <i class="bi bi-exclamation-triangle"></i>
+
                     </div>
 
+
                     <h3 class="h5 fw-bold">
+
                         Search could not be completed
+
                     </h3>
 
+
                     <p class="mb-0">
-                        ${escapeHtml(error.message)}
+
+                        ${escapeHtml(
+                            error.message
+                        )}
+
                     </p>
 
                 </div>
 
             </div>
+
         `;
+
 
         resultCount.textContent =
             "Search failed";
+
 
         showStatus(
             error.message,
@@ -1840,11 +3459,16 @@ async function searchMedium() {
 
     } finally {
 
-        searchBtn.disabled = false;
+        searchBtn.disabled =
+            false;
+
 
         searchBtn.innerHTML = `
+
             <i class="bi bi-search"></i>
+
             Search Medium
+
         `;
     }
 }
@@ -1862,8 +3486,10 @@ function showStatus(
     statusBox.className =
         `alert alert-${type} status-box`;
 
+
     statusBox.textContent =
         message;
+
 
     statusBox.style.display =
         "block";
@@ -1884,6 +3510,7 @@ function clearSearch() {
 
     allArticles = [];
 
+
     renderKeywordChips();
 
 
@@ -1898,25 +3525,35 @@ function clearSearch() {
             <div class="empty-state">
 
                 <div class="empty-icon">
+
                     <i class="bi bi-journal-richtext"></i>
+
                 </div>
 
+
                 <h3 class="h5 fw-bold">
+
                     Ready to search
+
                 </h3>
 
+
                 <p class="mb-0">
+
                     Enter your Medium profile and search term above.
+
                 </p>
 
             </div>
 
         </div>
+
     `;
 
 
     resultCount.textContent =
         "No search performed";
+
 
     statusBox.style.display =
         "none";
@@ -1930,8 +3567,11 @@ function clearSearch() {
 function toggleView() {
 
     currentView =
+
         currentView === "grid"
+
             ? "list"
+
             : "grid";
 
 
@@ -1943,20 +3583,26 @@ function toggleView() {
             "list-view"
         );
 
+
         viewToggle.innerHTML =
             '<i class="bi bi-grid-3x3-gap"></i>';
+
 
         viewToggle.title =
             "Switch to grid view";
 
-    } else {
+    }
+
+    else {
 
         results.classList.remove(
             "list-view"
         );
 
+
         viewToggle.innerHTML =
             '<i class="bi bi-list"></i>';
+
 
         viewToggle.title =
             "Switch to list view";
@@ -1973,12 +3619,15 @@ const savedTheme =
         "charlieMediumTheme"
     );
 
+
 if (
     savedTheme === "dark"
 ) {
+
     document.body.classList.add(
         "dark-mode"
     );
+
 
     themeBtn.innerHTML =
         '<i class="bi bi-sun"></i>';
@@ -2000,13 +3649,18 @@ function toggleTheme() {
 
     localStorage.setItem(
         "charlieMediumTheme",
-        dark ? "dark" : "light"
+        dark
+            ? "dark"
+            : "light"
     );
 
 
     themeBtn.innerHTML =
+
         dark
+
             ? '<i class="bi bi-sun"></i>'
+
             : '<i class="bi bi-moon-stars"></i>';
 }
 
@@ -2040,7 +3694,9 @@ keywordInput.addEventListener(
         if (
             event.key === "Enter"
         ) {
+
             event.preventDefault();
+
             addKeyword();
         }
     }
@@ -2054,7 +3710,9 @@ searchTextInput.addEventListener(
         if (
             event.key === "Enter"
         ) {
+
             event.preventDefault();
+
             searchMedium();
         }
     }
@@ -2080,6 +3738,7 @@ sortSelect.addEventListener(
         if (
             allArticles.length > 0
         ) {
+
             applyFiltersAndRender();
         }
     }
@@ -2103,7 +3762,11 @@ themeBtn.addEventListener(
 END OF APPLICATION
 ================================================================
 */
+
 </script>
 
+
 </body>
+
 </html>
+
